@@ -1,8 +1,10 @@
 <?php
 $config = parse_ini_file('config.ini', true);
 
+// define site domain
 define('SITE', $config['domain']);
 
+// define menu options
 define('DASHBOARD', 'dashboard');
 define('MULTI', 'multi');
 define('CALC', 'calc');
