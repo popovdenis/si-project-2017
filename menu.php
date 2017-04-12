@@ -24,6 +24,10 @@
                             <a <?php if ($title == USERS) :?> class="menu-top-active" <?php endif; ?>
                                 href="<?php echo SITE ?>/users.php">Users</a>
                         </li>
+                        <li>
+                            <a <?php if ($title == LOGIN) :?> class="menu-top-active" <?php endif; ?>
+                                href="<?php echo SITE ?>/login_or_register_form.php">LOGIN OR REGISTER</a>
+                        </li>
                     </ul>
                 </div>
             </div>
