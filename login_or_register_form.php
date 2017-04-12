@@ -43,7 +43,7 @@
                     <input type="password" name="confirmation" value="" placeholder="repeat password"
                            class="form-control"/>
                     <hr/>
-                    <input type="submit" value="&nbsp;Register me&nbsp;" class="btn btn-info" <span
+                    <input type="submit" value="&nbsp;Register Me&nbsp;" class="btn btn-info" <span
                         class="glyphicon glyphicon-user"></span>
                 </form>
             </div>
