@@ -5,9 +5,46 @@ class Question
 {
     use DB;
     
+    /**
+     * @var int
+     */
     private $id;
     
+    /**
+     * @var int
+     */
     private $question;
+    
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    /**
+     * @return int
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+    
+    /**
+     * @param int $question
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+    }
     
     public function __construct($questionData)
     {
@@ -24,21 +61,17 @@ class Question
         // получение экземпляра класса DB
         $db = DB::getInstance();
         
-        $firstname = 'William';
-        $lastname = "O'Genry";
-        
         // экранирование переменных
-        $firstname = $db->real_escape_string($firstname);
-        $lastname = $db->real_escape_string($lastname);
+        $question = $db->real_escape_string($this->getQuestion());
         // подготовка запроса
-        $query = "INSERT INTO user (`firstname`, `lastname`) VALUES ('$firstname', '$lastname')";
+        $query = "INSERT INTO question (`question`) VALUES ('$question')";
         // выполнение запроса
         $result = $db->query($query);
         if (!$result) {
             return false;
         }
         // save question and save insert_id to $this->id
-        $this->id = $db->insert_id;
+        $this->setId($db->insert_id);
     
         return true;
     }
