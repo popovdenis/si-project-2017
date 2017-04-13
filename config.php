@@ -11,7 +11,6 @@ define('CALC', 'calc');
 define('QUIZ', 'quiz');
 define('USERS', 'users');
 define('LOGIN', 'login');
-define('REGISTER', 'register');
 
 //$configDb = $config['db'];
 //define('DB_HOST', $configDb['host']);

@@ -1,4 +1,5 @@
 <?php
+
 class Question
 {
     private $id;
@@ -54,26 +55,29 @@ class QuestionAnswer
 {
     public function saveQuestionAndAnswer(Question $question, $answers)
     {
-    	foreach ($answers as $answer) {
-    		/**
-    		@var $anwer Answer
-    		*/
-    		
-    	}
+        foreach ($answers as $answer) {
+            /**
+             * @var $anwer Answer
+             */
+            
+        }
         // save question-answer
         // return true or false
     }
 }
 
+
 if (!empty($_POST)) {
     $questionFromPost = $_POST['question'];
     $answersFromPost = $_POST['answers'];
     
-    // validate data
+    // validate post
+    $questionFromPost = trim(strip_tags($questionFromPost));
+    $answersFromPost = trim(strip_tags($answersFromPost));
     
     // prepare question data
     $questionData = [
-        'question' => $questionFromPost
+        'question' => $questionFromPost,
     ];
     
     $questionObj = new Question($questionData);
@@ -81,19 +85,19 @@ if (!empty($_POST)) {
     $questionObj->save();
     
     // iterate answers
-    $answers=[];
+    $answers = [];
     foreach ($answersFromPost as $answer) {
         // prepare answer data
         $answerData = [
-            'answer' => $answer
+            'answer' => $answer,
         ];
         $answerObj = new Answer($answerData);
         // save answer
         $answerObj->save();
-
+        
         $answers[] = $answerObj;
     }
-
+    
     $questionAnswerObj = new QuestionAnswer();
     // save question-answer
     $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
