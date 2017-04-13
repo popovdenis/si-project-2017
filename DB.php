@@ -1,7 +1,7 @@
 <?php
 include_once 'config.php';
 
-class DB
+trait DB
 {
     private static $link = null;
     
