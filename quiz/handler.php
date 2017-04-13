@@ -1,7 +1,6 @@
 <?php
 require_once '../DB.php';
 
-
 class Question
 {
     use DB;
@@ -31,6 +30,7 @@ class Question
     {
         $this->id = $id;
     }
+    
     /**
      * @return int
      */
@@ -65,31 +65,89 @@ class Question
         // экранирование переменных
         $question = $db->real_escape_string($this->getQuestion());
         // подготовка запроса
-        $query = "INSERT INTO question (`question`) VALUES ('$question')";
+        $query = "INSERT INTO questions (`question`) VALUES ('$question')";
         // выполнение запроса
         $result = $db->query($query);
         if (!$result) {
             return false;
         }
         // save question and save insert_id to $this->id
-<<<<<<< HEAD:onlineTest/handler.php
-        $this->id = $db->insert_id;
-        
-=======
         $this->setId($db->insert_id);
-    
->>>>>>> denis:quiz/handler.php
+        
         return true;
     }
 }
 
 class Answer
 {
+    /**
+     * @var int
+     *
+     */
     private $id;
+    
+    /**
+     * @var int
+     *
+     */
     
     private $answer;
     
+    
+    /**
+     * @var bool
+     *
+     */
+    
     private $isCorrect;
+    
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+    
+    /**
+     * @param int $answer
+     */
+    public function setAnswer($answer)
+    {
+        $this->answer = $answer;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function getIsCorrect()
+    {
+        return $this->isCorrect;
+    }
+    
+    /**
+     * @param bool $isCorrect
+     */
+    public function setIsCorrect($isCorrect)
+    {
+        $this->isCorrect = $isCorrect;
+    }
     
     public function __construct($answerData)
     {
@@ -97,7 +155,7 @@ class Answer
             $this->id = $answerData['id'];
         }
         if (isset($answerData['answer'])) {
-            $this->answer = $answerData['question'];
+            $this->answer = $answerData['answer'];
         }
         if (isset($answerData['is_correct_answer'])) {
             $this->isCorrect = $answerData['is_correct_answer'];
@@ -109,21 +167,17 @@ class Answer
         // получение экземпляра класса DB
         $db = DB::getInstance();
         
-        $firstname = 'William';
-        $lastname = "O'Genry";
-        
         // экранирование переменных
-        $firstname = $db->real_escape_string($firstname);
-        $lastname = $db->real_escape_string($lastname);
+        $answer = $db->real_escape_string($this->getAnswer());
         // подготовка запроса
-        $query = "INSERT INTO user (`firstname`, `lastname`) VALUES ('$firstname', '$lastname')";
+        $query = "INSERT INTO answers (`answer`) VALUES ('$answer')";
         // выполнение запроса
         $result = $db->query($query);
         if (!$result) {
             return false;
         }
         // save question and save insert_id to $this->id
-        $this->id = $db->insert_id;
+        $this->setId($db->insert_id);
         
         return true;
     }
@@ -131,22 +185,37 @@ class Answer
 
 class QuestionAnswer
 {
-    public function saveQuestionAndAnswer(Question $question, Answer $answer)
+    public function saveQuestionAndAnswer(Question $question, $answers)
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
-        // save question-answer
-        // return true or false
+        /**
+         * @var Answer $answer
+         */
+        foreach ($answers as $answer) {
+            {
+                // экранирование переменных
+                $answer_id = $db->real_escape_string($answer->getId());
+                $question_id = $db->real_escape_string($question->getId());
+                //$answer_is_correct = $db->real_escape_string($answer->getIsCorrect());
+                // подготовка запроса
+                $query = "INSERT INTO question_answers (`question_id`, `answer_id`, `is_correct`) VALUES ('$question_id', '$answer_id', '1')";
+                // выполнение запроса
+                $result = $db->query($query);
+                if (!$result) {
+                    return false;
+                }
+                return true;
+            }
+        }
     }
 }
 
 if (!empty($_POST)) {
     $questionFromPost = $_POST['question'];
     $answersFromPost = $_POST['answers'];
-    
+    $answersChecks = $_POST['answer_check'];
     // validate data
-    $questionFromPost = trim(strip_tags($questionFromPost));
-    
     
     // prepare question data
     $questionData = [
@@ -158,29 +227,30 @@ if (!empty($_POST)) {
     $questionObj->save();
     
     // iterate answers
-    foreach ($answersFromPost as $answer) {
+    $answers = [];
+    foreach ($answersFromPost as $answerId => $answer) {
         // prepare answer data
         $answerData = [
             'answer' => $answer,
-            'question' => $questionFromPost,
-            'is_correct' => true,
+            'is_correct'=> (isset($answersChecks[$answerId])) ? 1 : 0
         ];
         $answerObj = new Answer($answerData);
         // save answer
         $answerObj->save();
         
-        $questionAnswerObj = new QuestionAnswer();
-        // save question-answer
-        $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answerObj);
+        $answers[] = $answerObj;
     }
-    
+    $questionAnswerObj = new QuestionAnswer();
+    // save question-answer
+    $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
 }
 echo "<pre>";
-var_dump($_POST);
+var_dump($questionObj);
 echo "</pre>";
 echo "<pre>";
-var_dump($answersFromPost);
+var_dump($answerObj);
 echo "</pre>";
 echo "<pre>";
-var_dump($answerData);
+var_dump($answers);
 echo "</pre>";
+
