@@ -40,7 +40,7 @@ class Question
         }
         // save question and save insert_id to $this->id
         $this->id = $db->insert_id;
-    
+        
         return true;
     }
 }
@@ -70,10 +70,10 @@ class Answer
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
-    
+        
         $firstname = 'William';
         $lastname = "O'Genry";
-    
+        
         // экранирование переменных
         $firstname = $db->real_escape_string($firstname);
         $lastname = $db->real_escape_string($lastname);
@@ -86,7 +86,7 @@ class Answer
         }
         // save question and save insert_id to $this->id
         $this->id = $db->insert_id;
-    
+        
         return true;
     }
 }
@@ -124,8 +124,8 @@ if (!empty($_POST)) {
         // prepare answer data
         $answerData = [
             'answer' => $answer,
-            'question'=>$questionFromPost,
-            'is_correct'=>true
+            'question' => $questionFromPost,
+            'is_correct' => true,
         ];
         $answerObj = new Answer($answerData);
         // save answer
@@ -135,7 +135,7 @@ if (!empty($_POST)) {
         // save question-answer
         $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answerObj);
     }
-
+    
 }
 echo "<pre>";
 var_dump($_POST);
