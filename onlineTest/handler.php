@@ -109,7 +109,7 @@ if (!empty($_POST)) {
     
     // prepare question data
     $questionData = [
-        'question' => $questionFromPost
+        'question' => $questionFromPost,
     ];
     
     $questionObj = new Question($questionData);
@@ -120,7 +120,9 @@ if (!empty($_POST)) {
     foreach ($answersFromPost as $answer) {
         // prepare answer data
         $answerData = [
-            'answer' => $answer
+            'answer' => $answer,
+            //'question'=>$questionFromPost,
+            //'is_correct'=>true
         ];
         $answerObj = new Answer($answerData);
         // save answer
@@ -130,4 +132,13 @@ if (!empty($_POST)) {
         // save question-answer
         $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answerObj);
     }
+    echo "<pre>";
+    var_dump($_POST);
+    echo "</pre>";
+    echo "<pre>";
+    var_dump($answersFromPost);
+    echo "</pre>";
+    echo "<pre>";
+    var_dump($answerData);
+    echo "</pre>";
 }
