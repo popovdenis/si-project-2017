@@ -13,15 +13,17 @@
         </div>
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-6">
-                <form action="onlineTest/handler.php" method="POST">
+                <form action="quiz/handler.php" method="POST">
                     Enter the question:
-                    <input type="text" name="question" value="" placeholder="enter the question"> <br />
-                    Enter answers: <br />
-                    <?php for ($i=1; $i <=4; $i++): ?>
-                        <input type="checkbox" name="answer_check"><input type="text" name="answers[<?php echo $i ?>]" value="" placeholder="enter the answer 1"><br />
+                    <input type="text" name="question" value="" placeholder="enter the question"> <br/>
+                    Enter answers: <br/>
+                    <?php for ($i = 1; $i <= 4; $i++): ?>
+                        <input type="checkbox" name="answer_check" value="1">
+                        <input type="text" name="answers[<?php echo $i ?>]" value="" placeholder="enter the answer 1">
+                        <br/>
                     <?php endfor; ?>
-                     <br />
-                    <input type="submit" value = "save">
+                    <br/>
+                    <input type="submit" value="save">
                 </form>
             </div>
         </div>
