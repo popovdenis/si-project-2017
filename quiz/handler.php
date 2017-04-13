@@ -157,8 +157,8 @@ class Answer
         if (isset($answerData['answer'])) {
             $this->answer = $answerData['answer'];
         }
-        if (isset($answerData['is_correct_answer'])) {
-            $this->isCorrect = $answerData['is_correct_answer'];
+        if (isset($answerData['is_correct'])) {
+            $this->isCorrect = $answerData['is_correct'];
         }
     }
     
@@ -197,9 +197,16 @@ class QuestionAnswer
                 // экранирование переменных
                 $answer_id = $db->real_escape_string($answer->getId());
                 $question_id = $db->real_escape_string($question->getId());
-                //$answer_is_correct = $db->real_escape_string($answer->getIsCorrect());
-                // подготовка запроса
-                $query = "INSERT INTO question_answers (`question_id`, `answer_id`, `is_correct`) VALUES ('$question_id', '$answer_id', '1')";
+                $answer_is_correct = $db->real_escape_string($answer->getIsCorrect());
+                /*
+                 * Запрос работает нормально только если выбрать первый чек-бокс
+                 * второй, третий и четвертый инсерт в таблицу questio_answers не выполняется
+                 *
+                 *
+                 */
+                
+                
+                $query = "INSERT INTO question_answers (`question_id`, `answer_id`, `is_correct`) VALUES ('$question_id', '$answer_id', '$answer_is_correct')";
                 // выполнение запроса
                 $result = $db->query($query);
                 if (!$result) {
@@ -232,7 +239,7 @@ if (!empty($_POST)) {
         // prepare answer data
         $answerData = [
             'answer' => $answer,
-            'is_correct'=> (isset($answersChecks[$answerId])) ? 1 : 0
+            'is_correct'=> (isset($answersChecks[$answerId])) ? true : false
         ];
         $answerObj = new Answer($answerData);
         // save answer
@@ -245,10 +252,10 @@ if (!empty($_POST)) {
     $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
 }
 echo "<pre>";
-var_dump($questionObj);
+var_dump($answersChecks);
 echo "</pre>";
 echo "<pre>";
-var_dump($answerObj);
+var_dump($answersFromPost);
 echo "</pre>";
 echo "<pre>";
 var_dump($answers);
