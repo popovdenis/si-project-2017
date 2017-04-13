@@ -1,6 +1,7 @@
 <?php
 require_once '../DB.php';
 
+
 class Question
 {
     use DB;
@@ -106,6 +107,8 @@ if (!empty($_POST)) {
     $answersFromPost = $_POST['answers'];
     
     // validate data
+    $questionFromPost = trim(strip_tags($questionFromPost));
+    
     
     // prepare question data
     $questionData = [
@@ -121,8 +124,8 @@ if (!empty($_POST)) {
         // prepare answer data
         $answerData = [
             'answer' => $answer,
-            //'question'=>$questionFromPost,
-            //'is_correct'=>true
+            'question'=>$questionFromPost,
+            'is_correct'=>true
         ];
         $answerObj = new Answer($answerData);
         // save answer
@@ -132,13 +135,14 @@ if (!empty($_POST)) {
         // save question-answer
         $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answerObj);
     }
-    echo "<pre>";
-    var_dump($_POST);
-    echo "</pre>";
-    echo "<pre>";
-    var_dump($answersFromPost);
-    echo "</pre>";
-    echo "<pre>";
-    var_dump($answerData);
-    echo "</pre>";
+
 }
+echo "<pre>";
+var_dump($_POST);
+echo "</pre>";
+echo "<pre>";
+var_dump($answersFromPost);
+echo "</pre>";
+echo "<pre>";
+var_dump($answerData);
+echo "</pre>";
