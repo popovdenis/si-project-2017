@@ -26,7 +26,7 @@ CREATE TABLE `answers` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `answer` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `answers` (
 
 LOCK TABLES `answers` WRITE;
 /*!40000 ALTER TABLE `answers` DISABLE KEYS */;
+INSERT INTO `answers` VALUES (1,'1'),(2,'3'),(3,'6'),(4,'9');
 /*!40000 ALTER TABLE `answers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,8 +59,34 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,'2+2');
+INSERT INTO `questions` VALUES (1,'3+3');
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `questions_answers`
+--
+
+DROP TABLE IF EXISTS `questions_answers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `questions_answers` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `question_id` int(10) NOT NULL,
+  `answer_id` int(10) NOT NULL,
+  `is_correct` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `questions_answers`
+--
+
+LOCK TABLES `questions_answers` WRITE;
+/*!40000 ALTER TABLE `questions_answers` DISABLE KEYS */;
+INSERT INTO `questions_answers` VALUES (1,1,1,0),(2,1,2,0),(3,1,3,1),(4,1,4,0);
+/*!40000 ALTER TABLE `questions_answers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -71,4 +98,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-13 22:34:15
+-- Dump completed on 2017-04-14 11:13:07
