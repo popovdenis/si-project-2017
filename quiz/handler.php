@@ -42,13 +42,13 @@ if (!empty($_POST)) {
     $result = $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
     // redirect to main quiz page with success message for user.
     if ($result) {
-        $_SESSION['message'] = 'Question and answers saved!';
+        $_SESSION['message'] = 'Questions and answers are saved successfully!';
     } else {
         $_SESSION['mistake'] = 'Error while saving questions!';
     }
     
 }
-header('Location: ../quiz.php');
+header('Location:' . SITE . '/' . 'quiz.php');
 
 
 

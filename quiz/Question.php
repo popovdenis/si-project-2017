@@ -86,10 +86,6 @@ class Question extends Entity
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
-        
-        // экранирование переменных
-        $question = $db->real_escape_string($this->getQuestion());
-        
         // экранирование переменных
         $question = $this->escape($this->getQuestion());
         // подготовка запроса
@@ -97,7 +93,6 @@ class Question extends Entity
         // выполнение запроса
         $result = $db->query($query);
         if (!$result) {
-            return false;
             die($db->error);
         }
         // save question and save insert_id to $this->id

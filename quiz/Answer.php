@@ -102,16 +102,12 @@ class Answer extends Entity
         // получение экземпляра класса DB
         $db = DB::getInstance();
         // экранирование переменных
-        $answer = $db->real_escape_string($this->getAnswer());
-        
-        // экранирование переменных
         $answer = $this->escape($this->getAnswer());
         // подготовка запроса
         $query = "INSERT INTO answers (`answer`) VALUES ('$answer')";
         // выполнение запроса
         $result = $db->query($query);
         if (!$result) {
-            return false;
             die($db->error);
         }
         // save question and save insert_id to $this->id

@@ -16,11 +16,10 @@ CREATE TABLE `questions` (
 --
 DROP TABLE IF EXISTS `answers`;
 CREATE TABLE `answers` (
-<<<<<<< HEAD
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `answer` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +43,7 @@ CREATE TABLE `questions` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `question` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +69,7 @@ CREATE TABLE `questions_answers` (
   `answer_id` int(10) NOT NULL,
   `is_correct` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,4 +109,4 @@ CREATE TABLE `questions_answers` (
     `is_correct` BOOL DEFAULT 0
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> denis
+
