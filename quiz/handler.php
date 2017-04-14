@@ -187,33 +187,35 @@ class QuestionAnswer
 {
     public function saveQuestionAndAnswer(Question $question, $answers)
     {
+        
         // получение экземпляра класса DB
         $db = DB::getInstance();
         /**
          * @var Answer $answer
          */
         foreach ($answers as $answer) {
-            {
-                // экранирование переменных
-                $answer_id = $db->real_escape_string($answer->getId());
-                $question_id = $db->real_escape_string($question->getId());
-                $answer_is_correct = $db->real_escape_string($answer->getIsCorrect());
-                /*
-                 * Запрос работает нормально только если выбрать первый чек-бокс
-                 * второй, третий и четвертый инсерт в таблицу questio_answers не выполняется
-                 *
-                 *
-                 */
-                
-                
-                $query = "INSERT INTO question_answers (`question_id`, `answer_id`, `is_correct`) VALUES ('$question_id', '$answer_id', '$answer_is_correct')";
-                // выполнение запроса
-                $result = $db->query($query);
-                if (!$result) {
-                    return false;
-                }
-                return true;
+            
+            echo "<pre>";
+            var_dump($answer);
+            echo "</pre>";
+            // экранирование переменных
+            $answer_id = $db->real_escape_string($answer->getId());
+            $question_id = $db->real_escape_string($question->getId());
+            $answer_is_correct = $db->real_escape_string($answer->getIsCorrect());
+            /*
+             * Цикл отрабатывает только для 1 элемента массива
+             *
+             *
+             */
+            $query =
+                "INSERT INTO question_answers (`question_id`, `answer_id`, `is_correct`) VALUES ('$question_id', '$answer_id', '$answer_is_correct')";
+            // выполнение запроса
+            $result = $db->query($query);
+            if (!$result) {
+                return false;
             }
+            
+            return true;
         }
     }
 }
@@ -239,7 +241,7 @@ if (!empty($_POST)) {
         // prepare answer data
         $answerData = [
             'answer' => $answer,
-            'is_correct'=> (isset($answersChecks[$answerId])) ? true : false
+            'is_correct' => (isset($answersChecks[$answerId])) ? true : false,
         ];
         $answerObj = new Answer($answerData);
         // save answer
@@ -254,10 +256,10 @@ if (!empty($_POST)) {
 echo "<pre>";
 var_dump($answersChecks);
 echo "</pre>";
-echo "<pre>";
-var_dump($answersFromPost);
-echo "</pre>";
-echo "<pre>";
-var_dump($answers);
-echo "</pre>";
 
+foreach ($answers as $answer) {
+    
+    echo "<pre>";
+    var_dump($answer);
+    echo "</pre>";
+}
