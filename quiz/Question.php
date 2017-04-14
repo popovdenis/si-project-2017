@@ -1,7 +1,6 @@
 <?php
 require_once '../DB.php';
 
-
 class Question
 {
     use DB;

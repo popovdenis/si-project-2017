@@ -3,12 +3,15 @@ require_once '../DB.php';
 require_once 'Question.php';
 require_once 'Answer.php';
 require_once 'QuestionAnswer.php';
+require_once '../config.php';
 
 if (!empty($_POST)) {
     $questionFromPost = $_POST['question'];
     $answersFromPost = $_POST['answers'];
     $answersChecks = $_POST['answer_check'];
+    
     // validate data
+    $questionFromPost = trim(strip_tags($questionFromPost));
     
     // prepare question data
     $questionData = [
@@ -33,6 +36,7 @@ if (!empty($_POST)) {
     $questionAnswerObj = new QuestionAnswer();
     // save question-answer
     $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
+    header('Location: ../quiz.php');
 }
 
 

@@ -33,7 +33,17 @@ trait DB
             }
             self::$link->query('SET NAMES utf8');
         }
-    
+        
         return self::$link;
+    }
+    
+    public function clear($value)
+    {
+        return trim(strip_tags($value));
+    }
+    
+    public function escape($value)
+    {
+        return $this->real_escape_string($value);
     }
 }
