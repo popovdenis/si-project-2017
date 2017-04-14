@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <h4> Login </h4>
                 <br/>
-                <form action="login.php" method="POST">
+                <form action="users/login_handler.php" method="POST">
                     <label>Enter Username : </label>
                     <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>
                     <label>Enter Email: </label>
@@ -32,7 +32,7 @@
             <div class="col-md-6">
                 <h4> Or Register </h4>
                 <br/>
-                <form action="register.php" method="POST">
+                <form action="users/register_handler.php" method="POST">
                     <label>Enter Username : </label>
                     <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>
                     <label>Enter Email: </label>
