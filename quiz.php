@@ -17,7 +17,7 @@
                     Enter the question:
                     <input type="text" name="question" value="" placeholder="enter the question"> <br/>
                     Enter answers: <br/>
-                    <?php for ($i = 1; $i <= 4; $i++): ?>
+                    <?php for ($i = 1; $i <= 4; $i++) : ?>
                         <input type="checkbox" name="answer_check[<?php echo $i ?>]" value="1">
                         <input type="text" name="answers[<?php echo $i ?>]" value="" placeholder="enter the answer 1">
                         <br/>
