@@ -185,7 +185,7 @@ class Answer
 
 class QuestionAnswer
 {
-    public function saveQuestionAndAnswer(Question $question, $answers)
+    public function saveQuestionAndAnswer(Question $question, $answer)
     {
         
         // получение экземпляра класса DB
@@ -193,10 +193,10 @@ class QuestionAnswer
         /**
          * @var Answer $answer
          */
-        foreach ($answers as $answer) {
+        //foreach ($answers as $answer) {
             
             echo "<pre>";
-            var_dump($answer);
+           // var_dump($answer);
             echo "</pre>";
             // экранирование переменных
             $answer_id = $db->real_escape_string($answer->getId());
@@ -217,7 +217,7 @@ class QuestionAnswer
             
             return true;
         }
-    }
+    //}
 }
 
 if (!empty($_POST)) {
@@ -248,18 +248,20 @@ if (!empty($_POST)) {
         $answerObj->save();
         
         $answers[] = $answerObj;
+        $questionAnswerObj = new QuestionAnswer();
+        // save question-answer
+        $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answerObj);
     }
-    $questionAnswerObj = new QuestionAnswer();
-    // save question-answer
-    $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
+
 }
 echo "<pre>";
 var_dump($answersChecks);
 echo "</pre>";
-
+/*
 foreach ($answers as $answer) {
     
     echo "<pre>";
     var_dump($answer);
     echo "</pre>";
 }
+*/
