@@ -1,21 +1,22 @@
 <?php
-require_once '../DB.php';
+require_once '../core/DB.php';
+require_once '../core/Entity.php';
 
-class Answer
+class Answer extends Entity
 {
     /**
      * @var int
-     *
      */
     private $id;
+    
     /**
-     * @var int
-     *
+     * @var string
      */
     private $answer;
+    
+    
     /**
      * @var bool
-     *
      */
     private $isCorrect;
     
@@ -37,6 +38,9 @@ class Answer
     
     /**
      * @return int
+     * Return answer value.
+     *
+     * @return string
      */
     public function getAnswer()
     {
@@ -44,7 +48,10 @@ class Answer
     }
     
     /**
-     * @param int $answer
+     * @param int    $answer
+     * Set answer value.
+     *
+     * @param string $answer
      */
     public function setAnswer($answer)
     {
@@ -67,6 +74,11 @@ class Answer
         $this->isCorrect = $isCorrect;
     }
     
+    /**
+     * Answer constructor.
+     *
+     * @param $answerData
+     */
     public function __construct($answerData)
     {
         if (isset($answerData['id'])) {
@@ -80,23 +92,31 @@ class Answer
         }
     }
     
+    /**
+     * Save answer.
+     *
+     * @return bool
+     */
     public function save()
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
         // экранирование переменных
         $answer = $db->real_escape_string($this->getAnswer());
+        
+        // экранирование переменных
+        $answer = $this->escape($this->getAnswer());
         // подготовка запроса
         $query = "INSERT INTO answers (`answer`) VALUES ('$answer')";
         // выполнение запроса
         $result = $db->query($query);
         if (!$result) {
             return false;
+            die($db->error);
         }
         // save question and save insert_id to $this->id
         $this->setId($db->insert_id);
         
         return true;
-        
     }
 }

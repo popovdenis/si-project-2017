@@ -1,28 +1,22 @@
--- MySQL dump 10.13  Distrib 5.6.35, for Win32 (AMD64)
---
--- Host: 127.0.0.1    Database: si_project
--- ------------------------------------------------------
--- Server version	5.6.35-log
+CREATE DATABASE `si_project`;
+USE `si_project`;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+--
+-- Table structure for table `questions`
+--
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE `questions` (
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `question` varchar(150) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `answers`
 --
-
 DROP TABLE IF EXISTS `answers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `answers` (
+<<<<<<< HEAD
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `answer` text,
   PRIMARY KEY (`id`)
@@ -99,3 +93,21 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2017-04-14 11:13:07
+=======
+`id` int(10) NOT NULL AUTO_INCREMENT,
+`answer` text,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `questions_answers`
+--
+DROP TABLE IF EXISTS `questions_answers`;
+CREATE TABLE `questions_answers` (
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `question_id` int(10) NOT NULL,
+    `answer_id` int(10) NOT NULL,
+    `is_correct` BOOL DEFAULT 0
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+>>>>>>> denis
