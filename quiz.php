@@ -1,5 +1,13 @@
 <?php require_once "header.php" ?>
-<?php require_once 'navbar.php' ?>
+<?php require_once 'navbar.php';
+session_start();
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+} else {
+    $message = '';
+}
+?>
+
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
 <?php require_once 'menu.php' ?>
@@ -12,12 +20,13 @@
             </div>
         </div>
         <div class="row">
+            <?php echo $message  ?>
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <form action="quiz/handler.php" method="POST">
                     Enter the question:
                     <input type="text" name="question" value="" placeholder="enter the question"> <br/>
                     Enter answers: <br/>
-                    <?php for ($i = 1; $i <= 4; $i++): ?>
+                    <?php for ($i = 1; $i <= 4; $i++) : ?>
                         <input type="checkbox" name="answer_check[<?php echo $i ?>]" value="1">
                         <input type="text" name="answers[<?php echo $i ?>]" value="" placeholder="enter the answer 1">
                         <br/>
