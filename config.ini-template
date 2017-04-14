@@ -1,0 +1,9 @@
+domain = "http://your-domain"
+
+[db]
+host = 'localhost'
+user = ''
+password = ''
+dbname = ''
+port = 3306
+charset = UTF8
