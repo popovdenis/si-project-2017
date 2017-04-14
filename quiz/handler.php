@@ -8,6 +8,7 @@ require_once 'QuestionAnswer.php';
 
 if (!empty($_POST)) {
     $questionFromPost = $_POST['question'];
+    $questionFromPost = trim(strip_tags($questionFromPost));
     $answersFromPost = $_POST['answers'];
     $answersChecks = $_POST['answer_check'];
     // validate data
@@ -38,14 +39,19 @@ if (!empty($_POST)) {
     
     $questionAnswerObj = new QuestionAnswer();
     // save question-answer
-    $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
+    $result = $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
+    // redirect to main quiz page with success message for user.
+    if ($result) {
+        $_SESSION['message'] = 'Question and answers saved!';
+    } else {
+        $_SESSION['mistake'] = 'Error while saving questions!';
+    }
     
 }
-$_SESSION['message'] = 'Question and answers saved!';
 header('Location: ../quiz.php');
 
 
-// redirect to main quiz page with success message for user.
+
 
 
 

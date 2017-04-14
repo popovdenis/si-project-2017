@@ -2,10 +2,18 @@
 <?php require_once 'navbar.php';
 session_start();
 if (isset($_SESSION['message'])) {
+    $panelType = 'panel panel-success';
     $message = $_SESSION['message'];
+    unset($_SESSION['message']);
+} elseif (isset($_SESSION['mistake'])) {
+    $panelType = 'panel panel-danger';
+    $message = $_SESSION['mistake'];
+    unset($_SESSION['mistake']);
 } else {
-    $message = '';
+    $panelType = 'panel panel-primary';
+    $message = 'Enter the question and the answers';
 }
+
 ?>
 
 <!-- LOGO HEADER END-->
@@ -20,20 +28,32 @@ if (isset($_SESSION['message'])) {
             </div>
         </div>
         <div class="row">
-            <?php echo $message  ?>
             <div class="col-md-3 col-sm-3 col-xs-6">
-                <form action="quiz/handler.php" method="POST">
+                <form action="quiz/handler.php" method="POST" style="align-content: center">
                     Enter the question:
-                    <input type="text" name="question" value="" placeholder="enter the question"> <br/>
+                    <input type="text" name="question" class="form-control"  value="" placeholder="Text input" />
+                    <hr />
                     Enter answers: <br/>
                     <?php for ($i = 1; $i <= 4; $i++) : ?>
-                        <input type="checkbox" name="answer_check[<?php echo $i ?>]" value="1">
-                        <input type="text" name="answers[<?php echo $i ?>]" value="" placeholder="enter the answer 1">
-                        <br/>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="answer_check[<?php echo $i ?>]" value="1" /><input type="text" class="form-control" name="answers[<?php echo $i ?>]"  value="" placeholder="enter the answer <?php echo $i ?>" />
+                            </label>
+                        </div>
                     <?php endfor; ?>
                     <br/>
-                    <input type="submit" value="save">
+                    <input type="submit" value="save" <button class="btn btn-primary" <i class="fa fa-edit "></i> </button>
                 </form>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="<?php echo $panelType ?>">
+                    <div class="panel-heading">
+                        Message
+                    </div>
+                    <div class="panel-body">
+                        <p><?php echo $message;  ?></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

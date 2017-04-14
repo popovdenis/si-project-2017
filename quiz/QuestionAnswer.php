@@ -46,8 +46,7 @@ class QuestionAnswer extends Entity
                     
                 }
             }
-            
-            return true;
         }
+        return true;
     }
 }
