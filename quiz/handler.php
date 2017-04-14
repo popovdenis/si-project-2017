@@ -185,28 +185,23 @@ class Answer
 
 class QuestionAnswer
 {
-    public function saveQuestionAndAnswer(Question $question, $answer)
+    public function saveQuestionAndAnswer(Question $question, $answers)
     {
-        
+        echo "<pre>";
+        var_dump($answers);
+        echo "</pre>";
         // получение экземпляра класса DB
         $db = DB::getInstance();
         /**
          * @var Answer $answer
          */
-        //foreach ($answers as $answer) {
+        foreach ($answers as $answer) {
             
-            echo "<pre>";
-           // var_dump($answer);
-            echo "</pre>";
+            
             // экранирование переменных
             $answer_id = $db->real_escape_string($answer->getId());
             $question_id = $db->real_escape_string($question->getId());
             $answer_is_correct = $db->real_escape_string($answer->getIsCorrect());
-            /*
-             * Цикл отрабатывает только для 1 элемента массива
-             *
-             *
-             */
             $query =
                 "INSERT INTO question_answers (`question_id`, `answer_id`, `is_correct`) VALUES ('$question_id', '$answer_id', '$answer_is_correct')";
             // выполнение запроса
@@ -214,10 +209,9 @@ class QuestionAnswer
             if (!$result) {
                 return false;
             }
-            
             return true;
         }
-    //}
+    }
 }
 
 if (!empty($_POST)) {
@@ -248,20 +242,17 @@ if (!empty($_POST)) {
         $answerObj->save();
         
         $answers[] = $answerObj;
-        $questionAnswerObj = new QuestionAnswer();
-        // save question-answer
-        $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answerObj);
+        
     }
-
+    $questionAnswerObj = new QuestionAnswer();
+    // save question-answer
+    $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answerObj);
+    
 }
 echo "<pre>";
 var_dump($answersChecks);
 echo "</pre>";
-/*
-foreach ($answers as $answer) {
-    
-    echo "<pre>";
-    var_dump($answer);
-    echo "</pre>";
-}
-*/
+echo "<pre>";
+var_dump($answers);
+echo "</pre>";
+
