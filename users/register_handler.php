@@ -1,5 +1,5 @@
 <?php
-include 'User.php';
+include_once 'User.php';
 
 if (!empty($_POST)) {
     $username = trim(strip_tags($_POST['username']));

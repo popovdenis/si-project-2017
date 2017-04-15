@@ -28,6 +28,15 @@ class User extends Entity
      */
     private $createdAt;
     
+    /**
+     * @var string
+     */
+    private $email_in;
+    /**
+     * @var string
+     */
+    private $password_in;
+    
     
     
     public function __construct($userData)
@@ -190,4 +199,14 @@ class User extends Entity
 
         return true;
     }
+
+
+
+public function getByEmailAndPassword($email_in,$password_in){
+
+        
+}
+    
+
+
 }
