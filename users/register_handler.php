@@ -1,23 +1,43 @@
 <?php
 include 'User.php';
 
-if(!empty($_POST)){
-    $username=trim(strip_tags($_POST['username']));
-    $email=trim(strip_tags($_POST['email']));
-    $password=trim(strip_tags($_POST['password']));
-    $confirmation=trim(strip_tags($_POST['confirmation']));
-    $createdAt=date("Y-m-d H:i:s");
+if (!empty($_POST)) {
+    $username = trim(strip_tags($_POST['username']));
+    $email = trim(strip_tags($_POST['email']));
+    $password = trim(strip_tags($_POST['password']));
+    $confirmation = trim(strip_tags($_POST['confirmation']));
+    $createdAt = date("Y-m-d H:i:s");
     
-    $userData=[
-        'username'=>$username,
-        'email'=>$email,
-        'password'=>$password,
-        'confirmation'=>$confirmation,
-        'createdAt'=>$createdAt
-    ];
     
-    $user = new User($userData);
-    $user->save();
+    $username = (string) $username;
+    $email = (string) $email;
+    $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+    
+    $password = (string) $password;
+    $password=md5($password);
+    
+    $confirmation = (string) $confirmation;
+    $confirmation=md5($confirmation);
+    
+    if ($confirmation === $password) {
+        $userData = [
+            'username' => $username,
+            'email' => $email,
+            'password' => $password,
+            'confirmation' => $confirmation,
+            'createdAt' => $createdAt,
+        ];
+        
+        $user = new User($userData);
+        $user->save();
+        
+        session_start();
+        $_SESSION['username']=$userData['username'];
+        $_SESSION['email']=$userData['email'];
+        $_SESSION['password']=$userData['password'];
+        header('location: '.SITE);
+        
+    }
     
 }
 

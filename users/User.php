@@ -138,7 +138,6 @@ class User extends Entity
     public function setPasswordConfirm($passwordConfirm)
     {
         $this->passwordConfirm = $passwordConfirm;
-        
     }
     
     /**
