@@ -1,62 +1,51 @@
 <?php
 require_once '../core/Entity.php';
 
-class User extends Entity
+class User extends Entity implements Serializable
 {
     /**
      * @var int
      */
     private $id;
+    
     /**
      * @var string
      */
     private $username;
+    
     /**
      * @var string
      */
     private $email;
+    
     /**
      * @var string
      */
     private $password;
+    
     /**
-     * @var string
-     */
-    private $passwordConfirm;
-    /**
-     * @var int
+     * @var \DateTime
      */
     private $createdAt;
     
     /**
-     * @var string
+     * User constructor.
+     *
+     * @param $userData
      */
-    private $email_in;
-    /**
-     * @var string
-     */
-    private $password_in;
-    
-    
-    
     public function __construct($userData)
     {
         if (isset($userData['username'])) {
             $this->setUsername($userData['username']);
         }
-        
         if (isset($userData['email'])) {
-             $this->setEmail($userData['email']);
+            $this->setEmail($userData['email']);
         }
         if (isset($userData['password'])) {
-            $this->setPassword($userData['password']) ;
+            $this->setPassword($userData['password']);
         }
-        if (isset($userData['confirmation'])) {
-            $this->setPasswordConfirm($userData['confirmation']) ;
-        }
-        if (isset($userData['createdAt'])) {
-            $this->setCreatedAt($userData['createdAt']) ;
-        }
+        
+        $this->setCreatedAt(new DateTime());
     }
     
     /**
@@ -73,6 +62,8 @@ class User extends Entity
     public function setId($id)
     {
         $this->id = $id;
+        
+        return $this;
     }
     
     /**
@@ -89,9 +80,10 @@ class User extends Entity
     public function setUsername($username)
     {
         $this->username = $username;
+        
+        
+        return $this;
     }
-    
-    
     
     /**
      * @return string
@@ -103,13 +95,13 @@ class User extends Entity
     
     /**
      * @param string $email
-     *
-     * @return User
      */
     public function setEmail($email)
     {
         $this->email = $email;
         
+        
+        return $this;
     }
     
     /**
@@ -122,35 +114,16 @@ class User extends Entity
     
     /**
      * @param string $password
-     *
-     * @return User
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->password = md5($password);
         
+        return $this;
     }
     
     /**
-     * @return string
-     */
-    public function getPasswordConfirm()
-    {
-        return $this->passwordConfirm;
-    }
-    
-    /**
-     * @param string $passwordConfirm
-     *
-     * @return User
-     */
-    public function setPasswordConfirm($passwordConfirm)
-    {
-        $this->passwordConfirm = $passwordConfirm;
-    }
-    
-    /**
-     * @return int
+     * @return DateTime
      */
     public function getCreatedAt()
     {
@@ -158,17 +131,63 @@ class User extends Entity
     }
     
     /**
-     * @param int $createdAt
-     *
-     * @return User
+     * @param DateTime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
         
+        return $this;
     }
     
+    /**
+     * Get user info.
+     *
+     * @return array
+     */
+    public function getUserInfo()
+    {
+        return [
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+            'email' => $this->getEmail(),
+            'created_at' => $this->getCreatedAt()
+        ];
+    }
     
+    /**
+     * String representation of object
+     *
+     * @link  http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize($this->getUserInfo());
+    }
+    
+    /**
+     * Constructs the object
+     *
+     * @link  http://php.net/manual/en/serializable.unserialize.php
+     *
+     * @param string $serialized <p>
+     *                           The string representation of the object.
+     *                           </p>
+     *
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        $userInfo = unserialize($serialized);
+        $this
+            ->setId($userInfo['id'])
+            ->setUsername($userInfo['username'])
+            ->setEmail($userInfo['email'])
+            ->setCreatedAt($userInfo['created_at']);
+    }
     
     /**
      * Save a question.
@@ -179,34 +198,33 @@ class User extends Entity
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
-
+        
         // экранирование переменных
         $username = $this->escape($this->getUsername());
         $email = $this->escape($this->getEmail());
         $password = $this->escape($this->getPassword());
-        $createdAt=$this->createdAt;
+        $createdAt = $this->getCreatedAt()->format('Y-m-d H:i:s');
         
         // подготовка запроса
-        $query = "INSERT INTO users (username,email,password,createdAt) VALUES ('$username','$email','$password','$createdAt')";
+        $query = "INSERT INTO users (username,email,password,createdAt) " .
+                    "VALUES ('$username','$email','$password','$createdAt')";
         
         // выполнение запроса
         $result = $db->query($query);
         
-        if (!$result) {die($db->error);}
+        if (!$result) {
+            die($db->error);
+        }
         
         // save question and save insert_id to $this->id
         $this->setId($db->insert_id);
-
+        
         return true;
     }
-
-
-
-public function getByEmailAndPassword($email_in,$password_in){
-
-        
-}
     
-
-
+    public function getByEmailAndPassword($email, $password)
+    {
+    
+    
+    }
 }

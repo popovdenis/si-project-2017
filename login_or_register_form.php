@@ -32,6 +32,16 @@
             <div class="col-md-6">
                 <h4> Or Register </h4>
                 <br/>
+                <?php if (!empty($_SESSION['error'])) : ?>
+                    <div class="alert alert-danger">
+                        <?php
+                            $message = $_SESSION['error'];
+                            $_SESSION['error'] = '';
+                            echo $message;
+                        ?>
+                    </div>
+                <?php endif ?>
+                <br/>
                 <form action="users/register_handler.php" method="POST">
                     <label>Enter Username : </label>
                     <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>

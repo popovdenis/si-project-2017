@@ -6,6 +6,17 @@
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
     <div class="container">
+<?php if (!empty($_SESSION['success'])) : ?>
+    <div class="row">
+        <div class="alert alert-success">
+            <?php
+                $message = $_SESSION['success'];
+                $_SESSION['success'] = '';
+                echo $message;
+            ?>
+        </div>
+    </div>
+<?php endif ?>
         <div class="row">
             <div class="col-md-12">
                 <h4 class="page-head-line">Dashboard</h4>
