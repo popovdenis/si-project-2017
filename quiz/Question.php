@@ -1,5 +1,5 @@
 <?php
-require_once '../Core/Entity.php';
+require_once '../core/Entity.php';
 
 class Question extends Entity
 {
