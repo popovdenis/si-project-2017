@@ -325,3 +325,17 @@ h5 a {
 h5 a:hover {
     color: white;
 }
+
+.btn-wide {
+    padding-left: 34px;
+    padding-right: 34px;
+    font-size: 15px;
+}
+
+.display-inline {
+    display: inline;
+}
+
+.width95 {
+    width: 95%;
+}

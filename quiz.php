@@ -1,20 +1,5 @@
 <?php require_once "header.php" ?>
-<?php require_once 'navbar.php';
-session_start();
-if (isset($_SESSION['message'])) {
-    $panelType = 'panel panel-success';
-    $message = $_SESSION['message'];
-    unset($_SESSION['message']);
-} elseif (isset($_SESSION['mistake'])) {
-    $panelType = 'panel panel-danger';
-    $message = $_SESSION['mistake'];
-    unset($_SESSION['mistake']);
-} else {
-    $panelType = 'panel panel-primary';
-    $message = 'Enter the question and the answers';
-}
-
-?>
+<?php require_once 'navbar.php'; ?>
 
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
@@ -24,34 +9,44 @@ if (isset($_SESSION['message'])) {
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="page-head-line">Dashboard</h4>
+                <h1 class="page-head-line">Questions and Answers </h1>
             </div>
         </div>
+        <?php if (isset($_SESSION['message'])) : ?>
         <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <form action="quiz/handler.php" method="POST" style="align-content: center">
-                    Enter the question:
-                    <input type="text" name="question" class="form-control"  value="" placeholder="Text input" />
-                    <hr />
-                    Enter answers: <br/>
-                    <?php for ($i = 1; $i <= 4; $i++) : ?>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="answer_check[<?php echo $i ?>]" value="1" /><input type="text" class="form-control" name="answers[<?php echo $i ?>]"  value="" placeholder="enter the answer <?php echo $i ?>" />
-                            </label>
-                        </div>
-                    <?php endfor; ?>
-                    <br/>
-                    <input type="submit" value="save" <button class="btn btn-primary" <i class="fa fa-edit "></i> </button>
-                </form>
+            <div class="col-md-12">
+                <?php $cssClass = (isset($_SESSION['result']) && !$_SESSION['result']) ? 'alert-danger' : 'alert-success'; ?>
+                <div class="alert <?php echo $cssClass ?>"><?php echo $_SESSION['message'] ?></div>
             </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="<?php echo $panelType ?>">
-                    <div class="panel-heading">
-                        Message
-                    </div>
+        </div>
+        <?php unset($_SESSION['message']); ?>
+        <?php unset($_SESSION['result']); ?>
+        <?php endif ?>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
                     <div class="panel-body">
-                        <p><?php echo $message;  ?></p>
+                        <form action="quiz/handler.php" method="POST" style="align-content: center">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Enter the question</label>
+                                <input type="text" class="form-control" name="question" placeholder="Enter question">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Enter answers:</label>
+                                <?php for ($i = 1; $i <= 4; $i++) : ?>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="answer_check[<?php echo $i ?>]" value="1" />
+                                        </label>
+                                        <input class="form-control display-inline width95"
+                                               type="text" name="answers[<?php echo $i ?>]" value=""
+                                               placeholder="enter the answer <?php echo $i ?>" />
+                                    </div>
+                                <?php endfor; ?>
+                            </div>
+                            <hr />
+                            <button type="submit" class="btn btn-primary btn-sm btn-wide">Save</button>
+                        </form>
                     </div>
                 </div>
             </div>
