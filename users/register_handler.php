@@ -9,7 +9,10 @@ if (!empty($_POST)) {
     $confirmation = isset($_POST['confirmation']) ? strip_tags(trim($_POST['confirmation'])) : '';
     
     $error = $success = '';
-    if ($password != $confirmation) {
+    if(empty($username || $email || $password || $confirmation)){
+        $error='Заполните пожулуйста поля формы';
+    }
+    elseif ($password != $confirmation) {
         $error = 'Пароли не совпадают!';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Email формат не верный!';

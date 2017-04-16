@@ -99,8 +99,6 @@ class User extends Entity implements Serializable
     public function setEmail($email)
     {
         $this->email = $email;
-        
-        
         return $this;
     }
     
@@ -224,7 +222,7 @@ class User extends Entity implements Serializable
     
     public function getByEmailAndPassword($email, $password)
     {
-    
-    
+        
+            
     }
 }
