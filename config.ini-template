@@ -4,6 +4,6 @@ domain = "http://your-domain"
 host = 'localhost'
 user = ''
 password = ''
-dbname = ''
+dbname = 'si_project'
 port = 3306
 charset = UTF8

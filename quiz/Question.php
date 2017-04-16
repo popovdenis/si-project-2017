@@ -1,19 +1,12 @@
 <?php
-
-require_once '../core/DB.php';
 require_once '../core/Entity.php';
 
 class Question extends Entity
 {
-    
     /**
      * @var int
      */
     private $id;
-    
-    /**
-     * @var int
-    
     
     /**
      * @var string
@@ -56,7 +49,6 @@ class Question extends Entity
     }
     
     /**
-     * @return int
      * Return a question value.
      *
      * @return string
@@ -81,7 +73,6 @@ class Question extends Entity
      *
      * @return bool
      */
-    
     public function save()
     {
         // получение экземпляра класса DB

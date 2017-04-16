@@ -1,16 +1,15 @@
 <?php
-
 require_once '../core/DB.php';
-session_start();
 require_once 'Question.php';
 require_once 'Answer.php';
 require_once 'QuestionAnswer.php';
 
+session_start();
+
 if (!empty($_POST)) {
-    $questionFromPost = $_POST['question'];
-    $questionFromPost = trim(strip_tags($questionFromPost));
-    $answersFromPost = $_POST['answers'];
-    $answersChecks = $_POST['answer_check'];
+    $questionFromPost = isset($_POST['question']) ? strip_tags(trim($_POST['question'])) : '';
+    $answersFromPost = isset($_POST['answers']) ? $_POST['answers'] : '';
+    $answersChecks = isset($_POST['answer_check']) ? $_POST['answer_check'] : '';
     // validate data
     
     // prepare question data
@@ -33,7 +32,6 @@ if (!empty($_POST)) {
         $answerObj->save();
         
         // collect answers
-        
         $answers[] = $answerObj;
     }
     
