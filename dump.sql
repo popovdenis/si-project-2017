@@ -43,3 +43,15 @@ CREATE TABLE `questions_answers` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- foreign keys for table `questions_answers`
+--
+ALTER TABLE questions_answers
+    ADD CONSTRAINT FK_qa_question
+FOREIGN KEY (question_id) REFERENCES questions (id)
+    ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE questions_answers
+    ADD CONSTRAINT `FK_qa_answer`
+FOREIGN KEY (answer_id) REFERENCES answers (id)
+    ON DELETE CASCADE  ON UPDATE CASCADE;

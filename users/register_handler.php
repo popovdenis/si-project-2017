@@ -2,7 +2,7 @@
 if(!session_id()) {
     session_start();
 }
-include_once 'User.php';
+include_once '../autoload.php';
 
 if (!empty($_POST)) {
     $username = isset($_POST['username']) ? strip_tags(trim($_POST['username'])) : '';

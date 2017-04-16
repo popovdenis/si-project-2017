@@ -1,5 +1,5 @@
 <?php
-require_once '../core/Entity.php';
+require_once BASE_PATH . '/core/Entity.php';
 
 class Answer extends Entity
 {
