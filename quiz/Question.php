@@ -85,10 +85,6 @@ class Question extends Entity
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
-        
-        // экранирование переменных
-        $question = $db->real_escape_string($this->getQuestion());
-        
         // экранирование переменных
         $question = $this->escape($this->getQuestion());
         // подготовка запроса
