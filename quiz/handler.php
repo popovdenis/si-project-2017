@@ -45,10 +45,11 @@ if (!empty($_POST)) {
     } else {
         $_SESSION['mistake'] = 'Error while saving questions!';
     }
-    $array = QuestionAnswer::getQuestionAndAnswer();
-    $_SESSION['QuestionAndCorrectAnswer'] = $array;
+
     //unset($_SESSION['QuestionAndCorrectAnswer']);
 }
+$array = QuestionAnswer::getQuestionAndAnswer();
+$_SESSION['QuestionAndCorrectAnswer'] = $array;
 header('Location:' . SITE . '/' . 'quiz.php');
 
 

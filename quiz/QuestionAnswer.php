@@ -38,7 +38,7 @@ class QuestionAnswer extends Entity
         return true;
     }
     
-    public function getQuestionAndAnswer()
+    public static function getQuestionAndAnswer()
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
@@ -47,20 +47,21 @@ class QuestionAnswer extends Entity
          *
          */
         $array = [];
-        $query = "SELECT q.id as `id`, q.question as `question`, a.answer as `answer`
+        $query = "SELECT q.id as `question_id`, q.question as `question`, a.answer as `answer`, qa.is_correct
                     FROM questions q, answers a, questions_answers qa
-                    WHERE q.id = question_id AND a.id = answer_id AND qa.is_correct = 1";
+                    WHERE q.id = question_id AND a.id = answer_id";
         $stmt = mysqli_prepare($db, $query);
         $result = mysqli_stmt_execute($stmt);
         if (!$result) {
-            die('Users are not exist ' . $stmt->error);
+            die('Questions are not exist ' . $stmt->error);
         }
         while ($stmt->fetch()) {
-            $stmt->bind_result($id, $question, $answer);
+            $stmt->bind_result($id, $question, $answer, $is_correct);
             $array[] = [
-                'id'=> $id,
+                'question_id'=> $id,
                 'question'=> $question,
-                'answer'=> $answer
+                'answer'=> $answer,
+                'is_correct'=>$is_correct
             ];
             
         }

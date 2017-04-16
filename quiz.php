@@ -13,13 +13,7 @@ if (isset($_SESSION['message'])) {
     $panelType = 'panel panel-primary';
     $message = 'Enter the question and the answers';
 }
-if (isset($_SESSION['QuestionAndCorrectAnswer'])) {
-    $QuestionsAndCorrectAnswers = $_SESSION['QuestionAndCorrectAnswer'];
-} else {
-    $QuestionsAndCorrectAnswers = 'No questions in database!';
-}
-//unset($_SESSION['QuestionAndCorrectAnswer']);
-    ?>
+?>
 
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
@@ -60,42 +54,7 @@ if (isset($_SESSION['QuestionAndCorrectAnswer'])) {
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Questions and coorect answers
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th>Question id</th>
-                                    <th>Question</th>
-                                    <th>Correct answer</th>
-                                </tr>
-                                <?php
-                                if (is_array($QuestionsAndCorrectAnswers)) {
-                                    foreach ($QuestionsAndCorrectAnswers as $value): ?>
-                                    <tr>
-                                        <td><?php echo $value['id'] ?></td>
-                                        <td><?php echo $value['question'] ?></td>
-                                        <td><?php echo $value['answer'] ?></td>
-                                    </tr>
-                                    <?php endforeach;
-                                } else {
-                                    echo $QuestionsAndCorrectAnswers;
-                                }
-                                ?>
-                                </thead>
-                                <tbody>
-                                <tr></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a href="quizForm.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
     </div>
 </div><br />
 <!-- CONTENT-WRAPPER SECTION END-->
