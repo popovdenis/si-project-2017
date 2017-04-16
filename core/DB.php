@@ -25,7 +25,7 @@ trait DB
             }
             self::$link->query('SET NAMES utf8');
         }
-    
+        
         return self::$link;
     }
     

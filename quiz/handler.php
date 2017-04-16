@@ -14,7 +14,6 @@ if (!empty($_POST)) {
     $answersChecks = $_POST['answer_check'];
     
     // validate data
-    $questionFromPost = trim(strip_tags($questionFromPost));
     
     // prepare question data
     $questionData = [
@@ -34,18 +33,11 @@ if (!empty($_POST)) {
         $answerObj = new Answer($answerData);
         // save answer
         $answerObj->save();
-        
         // collect answers
-        
         $answers[] = $answerObj;
     }
-    
     $questionAnswerObj = new QuestionAnswer();
     // save question-answer
-
-    $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
-    header('Location: ../quiz.php');
-
     $result = $questionAnswerObj->saveQuestionAndAnswer($questionObj, $answers);
     // redirect to main quiz page with success message for user.
     if ($result) {
@@ -53,8 +45,9 @@ if (!empty($_POST)) {
     } else {
         $_SESSION['mistake'] = 'Error while saving questions!';
     }
-    
-
+    $array = QuestionAnswer::getQuestionAndAnswer();
+    $_SESSION['QuestionAndCorrectAnswer'] = $array;
+    //unset($_SESSION['QuestionAndCorrectAnswer']);
 }
 header('Location:' . SITE . '/' . 'quiz.php');
 

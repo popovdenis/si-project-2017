@@ -14,7 +14,6 @@ class Answer extends Entity
      */
     private $answer;
     
-    
     /**
      * @var bool
      */

@@ -23,11 +23,11 @@ class QuestionAnswer extends Entity
          */
         foreach ($answers as $answer) {
             // экранирование переменных
-            $answer_id = $db->escape ( (int) $answer->getId());
-            $question_id = $db->escape ((int) $question->getId());
-            $answer_is_correct = $db->escape ((int) $answer->getIsCorrect());
-            $query =
-                "INSERT INTO questions_answers (`question_id`, `answer_id`, `is_correct`) VALUES ('$question_id', '$answer_id', '$answer_is_correct')";
+            $answer_id = $this->escape($answer->getId());
+            $question_id = $this->escape($question->getId());
+            $answer_is_correct = $this->escape($answer->getIsCorrect());
+            $query = "INSERT INTO questions_answers (`question_id`, `answer_id`, `is_correct`) 
+                        VALUES ('$question_id', '$answer_id', '$answer_is_correct')";
             // выполнение запроса
             $result = $db->query($query);
             if (!$result) {
@@ -36,5 +36,34 @@ class QuestionAnswer extends Entity
         }
         
         return true;
+    }
+    
+    public function getQuestionAndAnswer()
+    {
+        // получение экземпляра класса DB
+        $db = DB::getInstance();
+        /*
+         * @var array
+         *
+         */
+        $array = [];
+        $query = "SELECT q.id as `id`, q.question as `question`, a.answer as `answer`
+                    FROM questions q, answers a, questions_answers qa
+                    WHERE q.id = question_id AND a.id = answer_id AND qa.is_correct = 1";
+        $stmt = mysqli_prepare($db, $query);
+        $result = mysqli_stmt_execute($stmt);
+        if (!$result) {
+            die('Users are not exist ' . $stmt->error);
+        }
+        while ($stmt->fetch()) {
+            $stmt->bind_result($id, $question, $answer);
+            $array[] = [
+                'id'=> $id,
+                'question'=> $question,
+                'answer'=> $answer
+            ];
+            
+        }
+        return $array;
     }
 }
