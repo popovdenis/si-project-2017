@@ -1,5 +1,5 @@
 <?php
-require_once '../Core/Entity.php';
+require_once '../core/Entity.php';
 
 class QuestionAnswer extends Entity
 {
@@ -20,11 +20,11 @@ class QuestionAnswer extends Entity
          */
         foreach ($answers as $answer) {
             // экранирование переменных
-            $answer_id = $this->escape($answer->getId());
-            $question_id = $this->escape($question->getId());
-            $answer_is_correct = $this->escape($answer->getIsCorrect());
-            $query = "INSERT INTO questions_answers (`question_id`, `answer_id`, `is_correct`)" .
-                " VALUES ('$question_id', '$answer_id', '$answer_is_correct')";
+            $answer_id = (int) $answer->getId();
+            $question_id = (int) $question->getId();
+            $answer_is_correct = (int) $answer->getIsCorrect();
+            $query = "INSERT INTO questions_answers (`question_id`, `answer_id`, `is_correct`) " .
+                "VALUES ('$question_id', '$answer_id', '$answer_is_correct')";
             // выполнение запроса
             $result = $db->query($query);
             if (!$result) {

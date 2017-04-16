@@ -16,9 +16,9 @@ CREATE TABLE `questions` (
 --
 DROP TABLE IF EXISTS `answers`;
 CREATE TABLE `answers` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `answer` text,
-  PRIMARY KEY (`id`)
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `answer` text,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -26,9 +26,9 @@ CREATE TABLE `answers` (
 --
 DROP TABLE IF EXISTS `questions`;
 CREATE TABLE `questions` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `question` varchar(150) NOT NULL,
-  PRIMARY KEY (`id`)
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `question` varchar(150) NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -36,10 +36,10 @@ CREATE TABLE `questions` (
 --
 DROP TABLE IF EXISTS `questions_answers`;
 CREATE TABLE `questions_answers` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `question_id` int(10) NOT NULL,
-  `answer_id` int(10) NOT NULL,
-  `is_correct` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
+    `id` int(10) NOT NULL AUTO_INCREMENT,
+    `question_id` int(10) NOT NULL,
+    `answer_id` int(10) NOT NULL,
+    `is_correct` tinyint(1) DEFAULT '0',
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

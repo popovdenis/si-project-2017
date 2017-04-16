@@ -1,5 +1,5 @@
 <?php
-require_once '../Core/Entity.php';
+require_once '../core/Entity.php';
 
 class Answer extends Entity
 {
@@ -12,7 +12,6 @@ class Answer extends Entity
      * @var string
      */
     private $answer;
-    
     
     /**
      * @var bool
@@ -79,13 +78,13 @@ class Answer extends Entity
     public function __construct($answerData)
     {
         if (isset($answerData['id'])) {
-            $this->id = $answerData['id'];
+            $this->setId($answerData['id']);
         }
         if (isset($answerData['answer'])) {
-            $this->answer = $answerData['answer'];
+            $this->setAnswer($answerData['answer']);
         }
         if (isset($answerData['is_correct'])) {
-            $this->isCorrect = $answerData['is_correct'];
+            $this->setIsCorrect($answerData['is_correct']);
         }
     }
     
@@ -98,7 +97,6 @@ class Answer extends Entity
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
-        
         // экранирование переменных
         $answer = $this->escape($this->getAnswer());
         // подготовка запроса
