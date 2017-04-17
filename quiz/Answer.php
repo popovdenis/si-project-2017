@@ -1,5 +1,4 @@
 <?php
-require_once '../core/DB.php';
 require_once '../core/Entity.php';
 
 class Answer extends Entity
@@ -36,7 +35,6 @@ class Answer extends Entity
     }
     
     /**
-     * @return int
      * Return answer value.
      *
      * @return string
@@ -47,7 +45,6 @@ class Answer extends Entity
     }
     
     /**
-     * @param int    $answer
      * Set answer value.
      *
      * @param string $answer
@@ -81,13 +78,13 @@ class Answer extends Entity
     public function __construct($answerData)
     {
         if (isset($answerData['id'])) {
-            $this->id = $answerData['id'];
+            $this->setId($answerData['id']);
         }
         if (isset($answerData['answer'])) {
-            $this->answer = $answerData['answer'];
+            $this->setAnswer($answerData['answer']);
         }
         if (isset($answerData['is_correct'])) {
-            $this->isCorrect = $answerData['is_correct'];
+            $this->setIsCorrect($answerData['is_correct']);
         }
     }
     

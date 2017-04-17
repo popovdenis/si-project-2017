@@ -24,10 +24,12 @@
                             <a <?php if ($title == USERS) : ?> class="menu-top-active" <?php endif; ?>
                                 href="<?php echo SITE ?>/users.php">Users</a>
                         </li>
+                        <?php if (empty($_SESSION['userdata'])) : ?>
                         <li>
                             <a <?php if ($title == LOGIN) : ?> class="menu-top-active" <?php endif; ?>
                                 href="<?php echo SITE ?>/login_or_register_form.php">LOGIN OR REGISTER</a>
                         </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
