@@ -1,7 +1,6 @@
-<<<<<<< HEAD
+
 <?php require_once "header.php";
 require_once 'navbar.php';
-session_start();
 if (isset($_SESSION['message'])) {
     $panelType = 'panel panel-success';
     $message = $_SESSION['message'];
@@ -15,10 +14,7 @@ if (isset($_SESSION['message'])) {
     $message = 'Enter the question and the answers';
 }
 ?>
-=======
-<?php require_once "header.php" ?>
-<?php require_once 'navbar.php'; ?>
->>>>>>> dev
+
 
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
@@ -69,7 +65,7 @@ if (isset($_SESSION['message'])) {
                     </div>
                 </div>
             </div>
-            <a href="quizForm.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
+            <a href="quiz/quizHandler.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
     </div>
 </div><br />
 <!-- CONTENT-WRAPPER SECTION END-->

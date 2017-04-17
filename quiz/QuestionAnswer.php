@@ -57,7 +57,7 @@ class QuestionAnswer extends Entity
             $stmt->bind_result($id, $question, $answer, $is_correct);
             $array[] = [
                 'question_id'=> $id,
-                'question'=> $question,
+                'title'=> $question,
                 'answer'=> $answer,
                 'is_correct'=>$is_correct
             ];

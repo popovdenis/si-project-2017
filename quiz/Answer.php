@@ -111,4 +111,29 @@ class Answer extends Entity
         
         return true;
     }
+    
+    public static function getAnswersFromDB()
+    {
+        // получение экземпляра класса DB
+        $db = DB::getInstance();
+        /*
+         * @var array
+         *
+         */
+        $array = [];
+        $query = "SELECT answer FROM answers";
+        $stmt = mysqli_prepare($db, $query);
+        $result = mysqli_stmt_execute($stmt);
+        if (!$result) {
+            die('Questions are not exist ' . $stmt->error);
+        }
+        while ($stmt->fetch()) {
+            $stmt->bind_result($answer);
+            $array[] = [
+                'question'=> $answer
+            ];
+            
+        }
+        return $array;
+    }
 }
