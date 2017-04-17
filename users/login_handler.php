@@ -12,12 +12,8 @@ if (!empty($_POST)) {
     if(empty($username || $email || $password )){
         $error='Заполните пожулуйста поля формы';
     }
-//    elseif ($password != $confirmation) {
-//        $error = 'Пароль не совпадает!';
-//    }
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Email формат не верный!';
-    } else {
+    
+    else {
         $userData = [
             'username' => $username,
             'email' => $email,
@@ -25,7 +21,8 @@ if (!empty($_POST)) {
         ];
         
         $user = new User($userData);
-        $result = $user->save();
+        $result = $user->getByUnameEmailAndPassword();
+        
         
         if ($result) {
             $success = 'Вы успешно вошли, привет :) ' . $user->getUsername() . '!';

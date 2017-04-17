@@ -220,9 +220,22 @@ class User extends Entity implements Serializable
         return true;
     }
     
-    public function getByEmailAndPassword($email, $password)
+    public function getByUnameEmailAndPassword()
     {
+        $db=DB::getInstance();
         
-            
+        $username = $this->escape($this->getUsername());
+        $email = $this->escape($this->getEmail());
+        $password = $this->escape($this->getPassword());
+      
+        $query="SELECT * FROM users WHERE id AND username LIKE '$username' AND email LIKE  '$email' AND password LIKE '$password'";
+        
+        $result=$db->query($query);
+        
+        if (!$result) {
+            die($db->error);
+        }
+        
+        return true;
     }
 }
