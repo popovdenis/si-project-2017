@@ -112,7 +112,7 @@ class Answer extends Entity
         return true;
     }
     
-    public static function getAnswersFromDB()
+    public static function getAnswersFromDBByQuestionId($questionId)
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
@@ -121,7 +121,10 @@ class Answer extends Entity
          *
          */
         $array = [];
-        $query = "SELECT answer FROM answers";
+        $query = "SELECT answer FROM answers WHERE id IN (
+                    SELECT qa.answer_id
+                    FROM questions_answers qa
+                    WHERE qa.question_id = '$questionId')";
         $stmt = mysqli_prepare($db, $query);
         $result = mysqli_stmt_execute($stmt);
         if (!$result) {
@@ -129,9 +132,34 @@ class Answer extends Entity
         }
         while ($stmt->fetch()) {
             $stmt->bind_result($answer);
-            $array[] = [
-                'question'=> $answer
-            ];
+            $array[] = $answer;
+            
+        }
+        return $array;
+    }
+    
+    
+    public static function getCorrectAnswers()
+    {
+        // получение экземпляра класса DB
+        $db = DB::getInstance();
+        /*
+         * @var array
+         *
+         */
+        $array = [];
+        $query = "SELECT answer FROM answers WHERE id IN (
+                    SELECT qa.answer_id
+                    FROM questions_answers qa
+                    WHERE qa.question_id = '$questionId')";
+        $stmt = mysqli_prepare($db, $query);
+        $result = mysqli_stmt_execute($stmt);
+        if (!$result) {
+            die('Questions are not exist ' . $stmt->error);
+        }
+        while ($stmt->fetch()) {
+            $stmt->bind_result($answer);
+            $array[] = $answer;
             
         }
         return $array;

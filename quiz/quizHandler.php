@@ -11,7 +11,6 @@ $question = $answers = 0;
 if (isset($_POST["question"])) {
     $question = (int)$_POST["question"];
     if ($_POST["question"] > 0) {
-        /*
         if (empty($_SESSION["answers"])) {
             $_SESSION["answers"] = [];
         }
@@ -20,18 +19,20 @@ if (isset($_POST["question"])) {
         } else {
             $_SESSION["answers"][$question] = null;
         }
-        $answers = $_SESSION["answers"];*/
+        $answers = $_SESSION["answers"];
     }
     $question++;
 }
-
-
+//echo '$question='.$question;
+echo "<pre>";
+    var_dump($answers);
+echo "</pre>";
 $questions = Question::getQuestionsFromDB();
-//$answers = Answer::getAnswersFromDB();
+//$answers = Answer::getAnswersFromDBByQuestionId($question);
 ?>
 <?php
 
-if (count($questions) == 4) {
+if (count($questions) == count($answers)+1) {
     include "result.php";
 } elseif ($question > 0) {
     include "questionForm.php";
