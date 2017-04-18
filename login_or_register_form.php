@@ -17,11 +17,21 @@
             <div class="col-md-6">
                 <h4> Login </h4>
                 <br/>
+                <?php if (!empty($_SESSION['error'])) : ?>
+                    <div class="alert alert-danger">
+                        <?php
+                        $message = $_SESSION['error'];
+                        $_SESSION['error'] = '';
+                        echo $message;
+                        ?>
+                    </div>
+                <?php endif ?>
+                <br/>
                 <form action="users/login_handler.php" method="POST">
                     <label>Enter Username : </label>
                     <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>
                     <label>Enter Email: </label>
-                    <input type="text" name="username" value="" placeholder="enter email" class="form-control"/>
+                    <input type="text" name="email" value="" placeholder="enter email" class="form-control"/>
                     <label>Enter Password : </label>
                     <input type="password" name="password" value="" placeholder="enter password" class="form-control"/>
                     <hr/>
