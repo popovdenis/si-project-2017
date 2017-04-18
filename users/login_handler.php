@@ -21,11 +21,11 @@ if (!empty($_POST)) {
         ];
         
         $user = new User($userData);
-        $result = $user->getByUnameEmailAndPassword();
+        $result = $user->getByEmailAndPassword();
         
         
         if ($result) {
-            $success = 'Вы успешно вошли, привет :) ' . $user->getUsername() . '!';
+            $success = 'You logged in successfully, hello :) ' . $user->getUsername() . '!';
             $_SESSION['userdata'] = serialize($user);
         }
     }
