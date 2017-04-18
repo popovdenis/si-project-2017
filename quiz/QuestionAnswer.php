@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/core/Entity.php';
+include_once realpath(__DIR__ . '/../autoload.php');
 
 class QuestionAnswer extends Entity
 {

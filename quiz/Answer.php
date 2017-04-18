@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/core/Entity.php';
+include_once realpath(__DIR__ . '/../autoload.php');
 
 class Answer extends Entity
 {
@@ -117,19 +117,19 @@ class Answer extends Entity
         // получение экземпляра класса DB
         $db = DB::getInstance();
     
-        $query = "SELECT answer FROM answers WHERE id IN (
-                    SELECT qa.answer_id
-                    FROM questions_answers qa
-                    WHERE qa.question_id = '$questionId')";
-        $stmt = mysqli_prepare($db, $query);
-        $result = mysqli_stmt_execute($stmt);
+        $query = "SELECT a.answer
+            FROM questions_answers qa
+            INNER JOIN answers a ON a.id = qa.answer_id
+            INNER JOIN questions q ON q.id = qa.question_id
+            WHERE qa.question_id = '$questionId'";
+    
+        $result = $db->query($query);
         if (!$result) {
-            die('Questions are not exist ' . $stmt->error);
+            die($db->error);
         }
-        
+    
         $array = [];
-        while ($stmt->fetch()) {
-            $stmt->bind_result($answer);
+        while ($answer = $result->fetch_assoc()) {
             $array[] = $answer;
         }
         

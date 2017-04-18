@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/core/Entity.php';
+include_once realpath(__DIR__ . '/../autoload.php');
 
 class Question extends Entity
 {
@@ -97,24 +97,18 @@ class Question extends Entity
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
-        /*
-         * @var array
-         *
-         */
-        $array = [];
+    
         $query = "SELECT question FROM questions";
-        $stmt = mysqli_prepare($db, $query);
-        $result = mysqli_stmt_execute($stmt);
+        $result = $db->query($query);
         if (!$result) {
-            die('Questions are not exist ' . $stmt->error);
+            die($db->error);
         }
-        while ($stmt->fetch()) {
-            $stmt->bind_result($question);
-            $array[] = [
-                'question'=> $question
-            ];
-            
+        
+        $array = [];
+        while ($question = $result->fetch_assoc()) {
+            $array[] = $question;
         }
+        
         return $array;
     }
 }

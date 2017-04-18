@@ -11,7 +11,7 @@ if ($question == count($questions)-1) {
     <?php $answers = Answer::getAnswersFromDBByQuestionId($question+1) ?>
     <?php shuffle($answers)?>
     <?php foreach ($answers as $item): ?>
-        <?php echo $item ?> <input type="radio" name="answer" value=" <?php echo $item ?>"><br/>
+        <?php echo $item['answer']  ?> <input type="radio" name="answer" value=" <?php echo $item['answer'] ?>"><br/>
     <?php endforeach; ?>
     <br/><br/>
     <input type="hidden" name="question" value="<?php echo $question; ?>">
