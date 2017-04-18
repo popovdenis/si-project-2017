@@ -228,7 +228,8 @@ class User extends Entity implements Serializable
         $email = $this->escape($this->getEmail());
         $password = $this->escape($this->getPassword());
       
-        $query="SELECT * FROM users WHERE id AND username LIKE '$username' AND email LIKE  '$email' AND password LIKE '$password'";
+        $query="SELECT * FROM users WHERE username = '$username' AND email = '$email' AND password = 
+'$password' LIMIT 1";
         
         $result=$db->query($query);
         
