@@ -15,17 +15,25 @@
         </div>
         <div class="row">
             <div class="col-md-6">
+                
+                
                 <h4> Login </h4>
-                <?php if (isset($_SESSION['message'])) : ?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <?php $cssClass = (isset($_SESSION['result']) && !$_SESSION['result']) ? 'alert-danger' : 'alert-success'; ?>
-                            <div class="alert <?php echo $cssClass ?>"><?php echo $_SESSION['message'] ?></div>
-                        </div>
+                
+                <?php if (!empty($_SESSION['error_login'])) : ?>
+                    <div class="alert alert-danger">
+                        <?php
+                        $message = $_SESSION['error_login'];
+                        $_SESSION['error_login'] = '';
+                        echo $message;
+                        ?>
                     </div>
-                    <?php unset($_SESSION['message']); ?>
-                    <?php unset($_SESSION['result']); ?>
                 <?php endif ?>
+                
+                
+                
+                
+                
+                
                 <form action="users/login_handler.php" method="POST">
                     <label>Enter Username : </label>
                     <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>
@@ -38,19 +46,25 @@
                         class="glyphicon glyphicon-user"></span>
                 </form>
             </div>
+            
+            
+            
+            
+            
+            
             <div class="col-md-6">
                 <h4> Or Register </h4>
-                <br/>
-                <?php if (!empty($_SESSION['error'])) : ?>
+                
+                <?php if (!empty($_SESSION['error_register'])) : ?>
                     <div class="alert alert-danger">
                         <?php
-                            $message = $_SESSION['error'];
-                            $_SESSION['error'] = '';
+                            $message = $_SESSION['error_register'];
+                            $_SESSION['error_register'] = '';
                             echo $message;
                         ?>
                     </div>
                 <?php endif ?>
-                <br/>
+            
                 <form action="users/register_handler.php" method="POST">
                     <label>Enter Username : </label>
                     <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>

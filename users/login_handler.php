@@ -11,10 +11,15 @@ if (!empty($_POST)) {
     $password = isset($_POST['password']) ? strip_tags(trim($_POST['password'])) : '';
     
     $result = false;
-    $message = '';
-    if (empty($username || $email || $password)) {
-        $message = 'Fill in the form field';
-    } else {
+
+    
+    if (empty($username && $email && $password)) {
+        $error = 'Fill in the form field!';
+    }
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Email format wrong!';
+    }
+    else {
         $userData = [
             'username' => $username,
             'email' => $email,
@@ -27,17 +32,24 @@ if (!empty($_POST)) {
         if ($result) {
 
             $success = 'You logged in successfully, hello :) ' . $user->getUsername() . '!';
-
+            
             $_SESSION['userdata'] = serialize($user);
         }
     }
     
-    $_SESSION['message'] = $message;
-    $_SESSION['result'] = $result;
     
-    if (!empty($error)) {
+    $_SESSION['success'] = '';
+    
+    
+    if (!empty($error))
+    {
+        $_SESSION['error_login'] = $error;
         header('location: ' . SITE . '/login_or_register_form.php');
-    } else {
+    }
+    elseif (!empty($success))
+    {
+        $_SESSION['success']=$success;
         header('location: ' . SITE);
     }
+    
 }

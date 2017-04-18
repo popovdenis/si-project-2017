@@ -214,7 +214,7 @@ class User extends Entity implements Serializable
         $createdAt = $this->getCreatedAt()->format('Y-m-d H:i:s');
         
         // подготовка запроса
-        $query = "INSERT INTO users (username,email,password,created_at) " .
+        $query = "INSERT INTO users (username,email,password,createdAt) " .
                     "VALUES ('$username','$email','$password','$createdAt')";
         
         // выполнение запроса
@@ -239,7 +239,7 @@ class User extends Entity implements Serializable
         $password = $this->escape($this->getPassword());
       
         $query="SELECT * FROM users WHERE  email = '$email' AND password = 
-'$password' LIMIT 1";
+'$password' AND username='$username' LIMIT 1";
         
         $result=$db->query($query);
         
