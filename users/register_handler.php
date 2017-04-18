@@ -39,7 +39,7 @@ if (!empty($_POST)) {
         $user = new User($userData);
         $result = $user->save();
         
-        if ($result) {
+        if ($result==true) {
             $success = 'You successfully registered, ' . $user->getUsername() . '!';
             $_SESSION['userdata'] = serialize($user);
         }

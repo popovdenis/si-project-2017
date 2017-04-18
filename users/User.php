@@ -230,6 +230,9 @@ class User extends Entity implements Serializable
         return true;
     }
     
+    /**
+     * @return array
+     */
     public function getByEmailAndPassword()
     {
         $db=DB::getInstance();
@@ -238,15 +241,15 @@ class User extends Entity implements Serializable
         $email = $this->escape($this->getEmail());
         $password = $this->escape($this->getPassword());
       
-        $query="SELECT * FROM users WHERE  email = '$email' AND password = 
-'$password' AND username='$username' LIMIT 1";
+        $query="SELECT * FROM users WHERE email = '$email' ";
         
         $result=$db->query($query);
+    
+        if (!$result) {die($db->error);}
         
-        if (!$result) {
-            die($db->error);
-        }
-        
-        return true;
+         $row = $result->fetch_assoc();
+    
+      return $row;
+         
     }
 }

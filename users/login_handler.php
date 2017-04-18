@@ -10,16 +10,12 @@ if (!empty($_POST)) {
     $email = isset($_POST['email']) ? strip_tags(trim($_POST['email'])) : '';
     $password = isset($_POST['password']) ? strip_tags(trim($_POST['password'])) : '';
     
-    $result = false;
-
     
     if (empty($username && $email && $password)) {
         $error = 'Fill in the form field!';
-    }
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Email format wrong!';
-    }
-    else {
+    } else {
         $userData = [
             'username' => $username,
             'email' => $email,
@@ -29,22 +25,35 @@ if (!empty($_POST)) {
         $user = new User($userData);
         $result = $user->getByEmailAndPassword();
         
-        if ($result) {
-
-            $success = 'You logged in successfully, hello :) ' . $user->getUsername() . '!';
-            
-            $_SESSION['userdata'] = serialize($user);
+        
+        if ($username !== $result['username']) {
+            $error = 'Username wrong !';
+        } elseif ($email !== $result['email']) {
+            $error = '@email Wrong !';
+        } elseif (md5($password) !== $result['password']) {
+            $error = 'Password Wrong !';
         }
+        
+        
+        if ($username === $result['username'] && $email === $result['email']
+            && md5($password) === $result['password']
+        ) {
+            $success = 'You logged in successfully, hello :) ' . $user->getUsername() . '!';
+            $_SESSION['userdata'] = serialize($user);
+        } elseif ($username !== $result['username'] && $email !== $result['email']
+            && md5($password) !== $result['password']
+        ) {
+            $error = 'There is no such user, please register.';
+        }
+        
     }
     
-    if (!empty($error))
-    {
+    
+    if (!empty($error)) {
         $_SESSION['error_login'] = $error;
         header('location: ' . SITE . '/login_or_register_form.php');
-    }
-    elseif (!empty($success))
-    {
-        $_SESSION['success']=$success;
+    } elseif (!empty($success)) {
+        $_SESSION['success'] = $success;
         header('location: ' . SITE);
     }
     
