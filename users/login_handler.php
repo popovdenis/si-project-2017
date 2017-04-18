@@ -37,10 +37,6 @@ if (!empty($_POST)) {
         }
     }
     
-    
-    $_SESSION['success'] = '';
-    
-    
     if (!empty($error))
     {
         $_SESSION['error_login'] = $error;
