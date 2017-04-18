@@ -3,12 +3,14 @@ require_once '../core/DB.php';
 require_once 'Question.php';
 require_once 'Answer.php';
 require_once 'QuestionAnswer.php';
+require_once '../config.php';
 
 if(!session_id()) {
     session_start();
 }
 
 if (!empty($_POST)) {
+
     $questionFromPost = isset($_POST['question']) ? strip_tags(trim($_POST['question'])) : '';
     $answersFromPost = isset($_POST['answers']) ? $_POST['answers'] : '';
     $answersChecks = isset($_POST['answer_check']) ? $_POST['answer_check'] : '';
@@ -58,4 +60,6 @@ if (!empty($_POST)) {
     $_SESSION['message'] = $message;
     $_SESSION['result'] = $result;
 }
+//$array = QuestionAnswer::getQuestionAndAnswer();
+//$_SESSION['QuestionAndCorrectAnswer'] = $array;
 header('Location:' . SITE . '/' . 'quiz.php');

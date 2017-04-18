@@ -1,5 +1,20 @@
-<?php require_once "header.php" ?>
-<?php require_once 'navbar.php'; ?>
+
+<?php require_once "header.php";
+require_once 'navbar.php';
+if (isset($_SESSION['message'])) {
+    $panelType = 'panel panel-success';
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']);
+} elseif (isset($_SESSION['mistake'])) {
+    $panelType = 'panel panel-danger';
+    $message = $_SESSION['mistake'];
+    unset($_SESSION['mistake']);
+} else {
+    $panelType = 'panel panel-primary';
+    $message = 'Enter the question and the answers';
+}
+?>
+
 
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
@@ -50,8 +65,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <a href="quiz/quizHandler.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
     </div>
-</div>
+</div><br />
 <!-- CONTENT-WRAPPER SECTION END-->
 <?php require_once 'footer.php' ?>
