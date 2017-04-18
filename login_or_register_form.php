@@ -16,17 +16,16 @@
         <div class="row">
             <div class="col-md-6">
                 <h4> Login </h4>
-                <br/>
-                <?php if (!empty($_SESSION['error'])) : ?>
-                    <div class="alert alert-danger">
-                        <?php
-                        $message = $_SESSION['error'];
-                        $_SESSION['error'] = '';
-                        echo $message;
-                        ?>
+                <?php if (isset($_SESSION['message'])) : ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <?php $cssClass = (isset($_SESSION['result']) && !$_SESSION['result']) ? 'alert-danger' : 'alert-success'; ?>
+                            <div class="alert <?php echo $cssClass ?>"><?php echo $_SESSION['message'] ?></div>
+                        </div>
                     </div>
+                    <?php unset($_SESSION['message']); ?>
+                    <?php unset($_SESSION['result']); ?>
                 <?php endif ?>
-                <br/>
                 <form action="users/login_handler.php" method="POST">
                     <label>Enter Username : </label>
                     <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>

@@ -1,5 +1,5 @@
 <?php
-require_once '../core/Entity.php';
+require_once BASE_PATH . '/core/Entity.php';
 
 class User extends Entity implements Serializable
 {
@@ -58,6 +58,8 @@ class User extends Entity implements Serializable
     
     /**
      * @param int $id
+     *
+     * @return $this
      */
     public function setId($id)
     {
@@ -76,11 +78,12 @@ class User extends Entity implements Serializable
     
     /**
      * @param string $username
+     *
+     * @return $this
      */
     public function setUsername($username)
     {
         $this->username = $username;
-        
         
         return $this;
     }
@@ -95,10 +98,13 @@ class User extends Entity implements Serializable
     
     /**
      * @param string $email
+     *
+     * @return $this
      */
     public function setEmail($email)
     {
         $this->email = $email;
+        
         return $this;
     }
     
@@ -112,6 +118,8 @@ class User extends Entity implements Serializable
     
     /**
      * @param string $password
+     *
+     * @return $this
      */
     public function setPassword($password)
     {
@@ -130,6 +138,8 @@ class User extends Entity implements Serializable
     
     /**
      * @param DateTime $createdAt
+     *
+     * @return $this
      */
     public function setCreatedAt($createdAt)
     {
@@ -204,7 +214,7 @@ class User extends Entity implements Serializable
         $createdAt = $this->getCreatedAt()->format('Y-m-d H:i:s');
         
         // подготовка запроса
-        $query = "INSERT INTO users (username,email,password,createdAt) " .
+        $query = "INSERT INTO users (username,email,password,created_at) " .
                     "VALUES ('$username','$email','$password','$createdAt')";
         
         // выполнение запроса

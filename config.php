@@ -3,6 +3,7 @@ $config = parse_ini_file('config.ini', true);
 
 // define site domain
 define('SITE', $config['domain']);
+define('BASE_PATH', realpath(__DIR__));
 
 // define menu options
 define('DASHBOARD', 'dashboard');

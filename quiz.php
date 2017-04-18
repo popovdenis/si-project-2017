@@ -13,14 +13,14 @@
             </div>
         </div>
         <?php if (isset($_SESSION['message'])) : ?>
-        <div class="row">
-            <div class="col-md-12">
-                <?php $cssClass = (isset($_SESSION['result']) && !$_SESSION['result']) ? 'alert-danger' : 'alert-success'; ?>
-                <div class="alert <?php echo $cssClass ?>"><?php echo $_SESSION['message'] ?></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?php $cssClass = (isset($_SESSION['result']) && !$_SESSION['result']) ? 'alert-danger' : 'alert-success'; ?>
+                    <div class="alert <?php echo $cssClass ?>"><?php echo $_SESSION['message'] ?></div>
+                </div>
             </div>
-        </div>
-        <?php unset($_SESSION['message']); ?>
-        <?php unset($_SESSION['result']); ?>
+            <?php unset($_SESSION['message']); ?>
+            <?php unset($_SESSION['result']); ?>
         <?php endif ?>
         <div class="row">
             <div class="col-md-6">
@@ -51,6 +51,7 @@
                 </div>
             </div>
         </div>
+        <a href="quiz/quizHandler.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
     </div>
 </div>
 <!-- CONTENT-WRAPPER SECTION END-->

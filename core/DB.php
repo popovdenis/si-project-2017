@@ -1,6 +1,4 @@
 <?php
-include_once '../config.php';
-
 trait DB
 {
     /**
@@ -25,7 +23,7 @@ trait DB
             }
             self::$link->query('SET NAMES utf8');
         }
-    
+        
         return self::$link;
     }
     

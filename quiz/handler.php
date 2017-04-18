@@ -4,7 +4,7 @@ require_once 'Question.php';
 require_once 'Answer.php';
 require_once 'QuestionAnswer.php';
 
-if(!session_id()) {
+if (!session_id()) {
     session_start();
 }
 

@@ -1,5 +1,5 @@
 <?php
-require_once '../core/Entity.php';
+include_once realpath(__DIR__ . '/../autoload.php');
 
 class Question extends Entity
 {
@@ -90,5 +90,25 @@ class Question extends Entity
         $this->setId($db->insert_id);
         
         return true;
+    }
+    
+    
+    public static function getQuestionsFromDB()
+    {
+        // получение экземпляра класса DB
+        $db = DB::getInstance();
+    
+        $query = "SELECT question FROM questions";
+        $result = $db->query($query);
+        if (!$result) {
+            die($db->error);
+        }
+        
+        $array = [];
+        while ($question = $result->fetch_assoc()) {
+            $array[] = $question;
+        }
+        
+        return $array;
     }
 }
