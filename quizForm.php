@@ -1,6 +1,5 @@
-<?php require_once "header.php";
-require_once 'navbar.php';
-?>
+<?php require_once "header.php" ?>
+<?php require_once 'navbar.php'; ?>
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
 <?php require_once 'menu.php' ?>
@@ -25,7 +24,9 @@ require_once 'navbar.php';
                 <input type="hidden" name="question" value="<?php echo 0 ?>">
                 <input type="submit" class="btn btn-primary btn-lg" value="Start the quiz">
             </form>
-           
-    </div><br />
-    <!-- CONTENT-WRAPPER SECTION END-->
-    <?php require_once 'footer.php' ?>
+        </div>
+        <br />
+    </div>
+</div>
+<!-- CONTENT-WRAPPER SECTION END-->
+<?php require_once 'footer.php' ?>

@@ -1,20 +1,5 @@
-
-<?php require_once "header.php";
-require_once 'navbar.php';
-if (isset($_SESSION['message'])) {
-    $panelType = 'panel panel-success';
-    $message = $_SESSION['message'];
-    unset($_SESSION['message']);
-} elseif (isset($_SESSION['mistake'])) {
-    $panelType = 'panel panel-danger';
-    $message = $_SESSION['mistake'];
-    unset($_SESSION['mistake']);
-} else {
-    $panelType = 'panel panel-primary';
-    $message = 'Enter the question and the answers';
-}
-?>
-
+<?php require_once "header.php" ?>
+<?php require_once 'navbar.php'; ?>
 
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
@@ -28,14 +13,14 @@ if (isset($_SESSION['message'])) {
             </div>
         </div>
         <?php if (isset($_SESSION['message'])) : ?>
-        <div class="row">
-            <div class="col-md-12">
-                <?php $cssClass = (isset($_SESSION['result']) && !$_SESSION['result']) ? 'alert-danger' : 'alert-success'; ?>
-                <div class="alert <?php echo $cssClass ?>"><?php echo $_SESSION['message'] ?></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?php $cssClass = (isset($_SESSION['result']) && !$_SESSION['result']) ? 'alert-danger' : 'alert-success'; ?>
+                    <div class="alert <?php echo $cssClass ?>"><?php echo $_SESSION['message'] ?></div>
+                </div>
             </div>
-        </div>
-        <?php unset($_SESSION['message']); ?>
-        <?php unset($_SESSION['result']); ?>
+            <?php unset($_SESSION['message']); ?>
+            <?php unset($_SESSION['result']); ?>
         <?php endif ?>
         <div class="row">
             <div class="col-md-6">
@@ -65,8 +50,8 @@ if (isset($_SESSION['message'])) {
                     </div>
                 </div>
             </div>
-            <a href="quiz/quizHandler.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
+        </div>
     </div>
-</div><br />
+</div>
 <!-- CONTENT-WRAPPER SECTION END-->
 <?php require_once 'footer.php' ?>

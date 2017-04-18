@@ -116,11 +116,7 @@ class Answer extends Entity
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
-        /*
-         * @var array
-         *
-         */
-        $array = [];
+    
         $query = "SELECT answer FROM answers WHERE id IN (
                     SELECT qa.answer_id
                     FROM questions_answers qa
@@ -130,11 +126,13 @@ class Answer extends Entity
         if (!$result) {
             die('Questions are not exist ' . $stmt->error);
         }
+        
+        $array = [];
         while ($stmt->fetch()) {
             $stmt->bind_result($answer);
             $array[] = $answer;
-            
         }
+        
         return $array;
     }
     
@@ -143,11 +141,7 @@ class Answer extends Entity
     {
         // получение экземпляра класса DB
         $db = DB::getInstance();
-        /*
-         * @var array
-         *
-         */
-        $array = [];
+    
         $query = "SELECT answer FROM answers WHERE id IN (
                     SELECT qa.answer_id
                     FROM questions_answers qa
@@ -157,11 +151,14 @@ class Answer extends Entity
         if (!$result) {
             die('Questions are not exist ' . $stmt->error);
         }
+        
+        $array = [];
         while ($stmt->fetch()) {
             $stmt->bind_result($answer);
             $array[] = $answer;
             
         }
+        
         return $array;
     }
 }

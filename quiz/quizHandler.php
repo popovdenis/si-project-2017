@@ -1,11 +1,12 @@
 <?php
-
 require_once '../core/DB.php';
-session_start();
 require_once 'Question.php';
 require_once 'Answer.php';
 require_once 'QuestionAnswer.php';
-require_once '../config.php';
+
+if (!session_id()) {
+    session_start();
+}
 
 $question = $answers = 0;
 if (isset($_POST["question"])) {
@@ -40,7 +41,3 @@ if (count($questions) == count($answers)+1) {
     unset($_SESSION['answers']);
     include "start.php";
 }
-
-
-
-
