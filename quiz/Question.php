@@ -98,7 +98,7 @@ class Question extends Entity
         // получение экземпляра класса DB
         $db = DB::getInstance();
     
-        $query = "SELECT question FROM questions";
+        $query = "SELECT * FROM questions";
         $result = $db->query($query);
         if (!$result) {
             die($db->error);
@@ -106,7 +106,7 @@ class Question extends Entity
         
         $array = [];
         while ($question = $result->fetch_assoc()) {
-            $array[] = $question;
+            $array[$question['id']] = $question['question'];
         }
         
         return $array;

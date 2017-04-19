@@ -117,7 +117,7 @@ class Answer extends Entity
         // получение экземпляра класса DB
         $db = DB::getInstance();
     
-        $query = "SELECT a.answer
+        $query = "SELECT a.id, a.answer
             FROM questions_answers qa
             INNER JOIN answers a ON a.id = qa.answer_id
             INNER JOIN questions q ON q.id = qa.question_id
