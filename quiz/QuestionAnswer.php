@@ -66,4 +66,29 @@ class QuestionAnswer extends Entity
         
         return $array;
     }
+    
+    public static function getAnswersByQuestionsIds($questionsIds)
+    {
+        // получение экземпляра класса DB
+        $db = DB::getInstance();
+        
+        $query = "SELECT qa.answer_id, qa.question_id
+            FROM questions_answers qa
+            INNER JOIN answers a ON a.id = qa.answer_id
+            INNER JOIN questions q ON q.id = qa.question_id
+            WHERE qa.question_id IN (" . implode(',', $questionsIds) . ") AND qa.is_correct = 1";
+    
+        // выполнение запроса
+        $result = $db->query($query);
+        if (!$result) {
+            die($db->error);
+        }
+    
+        $answers = [];
+        while ($answer = $result->fetch_assoc()) {
+            $answers[$answer['question_id']] = $answer['answer_id'];
+        }
+    
+        return $answers;
+    }
 }

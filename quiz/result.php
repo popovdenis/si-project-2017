@@ -1,14 +1,21 @@
 <?php
 $result = 0;
-if (isset ($_SESSION["answers"])) {
-    $answers = parse_ini_file("quiz/answers.ini");
-    foreach ($_SESSION["answers"] as $key => $value) {
-        if ($value == $answers[$key]) {
+$questions = [];
+if (!empty($_SESSION["answers"]) && !empty($_SESSION['questions'])) {
+    $questions = unserialize($_SESSION['questions']);
+    $questionsIds = array_keys($questions);
+    $correctAnswersIds = QuestionAnswer::getAnswersByQuestionsIds($questionsIds);
+    
+    $userAnswers = $_SESSION["answers"];
+    
+    foreach ($userAnswers as $questionId => $answerId) {
+        if (isset($correctAnswersIds[$questionId]) && $correctAnswersIds[$questionId] == $answerId) {
             $result++;
         }
     }
-    //unset($_SESSION['answers']);
+    unset($_SESSION['answers']);
+    unset($_SESSION['questions']);
 }
 ?>
 <p> Your result is <?php echo $result ?> from <?php echo count($questions) ?> </p>
-<p><a href=<?php echo WAY ?>> Start the test again </a></p>
+<p><a href="<?php echo SITE ?>/quiz.php"> Start the test again </a></p>
