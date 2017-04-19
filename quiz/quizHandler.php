@@ -1,8 +1,5 @@
 <?php
-require_once '../core/DB.php';
-require_once 'Question.php';
-require_once 'Answer.php';
-require_once 'QuestionAnswer.php';
+include_once realpath(__DIR__ . '/../autoload.php');
 
 if (!session_id()) {
     session_start();
@@ -15,25 +12,26 @@ if (isset($_POST["question"])) {
         if (empty($_SESSION["answers"])) {
             $_SESSION["answers"] = [];
         }
-        if (isset($_POST["answer"])) {
-            $_SESSION["answers"][$question] = $_POST["answer"];
-        } else {
+        if (!isset($_POST["answer"])) {
             $_SESSION["answers"][$question] = null;
         }
+        $_SESSION["answers"][$question] = (int) trim($_POST["answer"]);
         $answers = $_SESSION["answers"];
     }
     $question++;
 }
-//echo '$question='.$question;
-echo "<pre>";
-    var_dump($answers);
-echo "</pre>";
-$questions = Question::getQuestionsFromDB();
-//$answers = Answer::getAnswersFromDBByQuestionId($question);
+
+$questions = [];
+if (!isset($_SESSION['questions'])) {
+    $questions = Question::getQuestionsFromDB();
+    $_SESSION['questions'] = serialize($questions);
+} else {
+    $questions = unserialize($_SESSION['questions']);
+}
 ?>
 <?php
 
-if (count($questions) == count($answers)+1) {
+if (count($questions) == count($answers)) {
     include "result.php";
 } elseif ($question > 0) {
     include "questionForm.php";

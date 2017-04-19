@@ -1,5 +1,3 @@
-<?php ?>
-
 <div align="center" style="margin: 10%">
     <p> The test  </p>
     <form action="quizHandler.php" method="POST">

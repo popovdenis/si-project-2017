@@ -1,14 +1,8 @@
-<?php
-$value = 'next question';
-if ($question == count($questions)-1) {
-    $value = 'Finish';
-}
-
-?>
+<?php $value = 'next question'; ?>
 <form action="quizHandler.php" method="POST">
-    Question: <?php echo $questions[$question]["question"] ?> <br/><br/>
+    Question: <?php echo $questions[$question - 1]["question"] ?> <br/><br/>
     Answers: <br/>
-    <?php $answers = Answer::getAnswersFromDBByQuestionId($question+1) ?>
+    <?php $answers = Answer::getAnswersFromDBByQuestionId($question) ?>
     <?php shuffle($answers)?>
     <?php foreach ($answers as $item): ?>
         <?php echo $item['answer']  ?> <input type="radio" name="answer" value=" <?php echo $item['answer'] ?>"><br/>
