@@ -10,14 +10,17 @@ if (!empty($_POST)) {
     $email = isset($_POST['email']) ? strip_tags(trim($_POST['email'])) : '';
     $password = isset($_POST['password']) ? strip_tags(trim($_POST['password'])) : '';
     
+    $result=false;
     
     if (empty($username && $email && $password)) {
         $error = 'Fill in the form field!';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Email format wrong!';
-    } else {
+    }
+    
+    else {
+        
         $userData = [
-            'username' => $username,
             'email' => $email,
             'password' => $password,
         ];
@@ -26,23 +29,12 @@ if (!empty($_POST)) {
         $result = $user->getByEmailAndPassword();
         
         
-        if ($username !== $result['username']) {
-            $error = 'Username wrong !';
-        } elseif ($email !== $result['email']) {
-            $error = '@email Wrong !';
-        } elseif (md5($password) !== $result['password']) {
-            $error = 'Password Wrong !';
-        }
-        
-        
-        if ($username === $result['username'] && $email === $result['email']
-            && md5($password) === $result['password']
-        ) {
+        if ($result==true) {
             $success = 'You logged in successfully, hello :) ' . $user->getUsername() . '!';
             $_SESSION['userdata'] = serialize($user);
-        } elseif ($username !== $result['username'] && $email !== $result['email']
-            && md5($password) !== $result['password']
-        ) {
+        }
+        else
+        {
             $error = 'There is no such user, please register.';
         }
         
