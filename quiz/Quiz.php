@@ -1,27 +1,11 @@
 <?php
-require_once BASE_PATH . '/core/Entity.php';
+
+include_once realpath(__DIR__ . '/../autoload.php');
 
 class Quiz  extends Entity
 {
-public $user;
+    
 private $results;
-private $createdAt;
-
-  
-    
-    
-    
-    
-    public function getResults()
-    {
-        return $this->results;
-    }
-    
-    public function setResults($results)
-    {
-        $this->results=$results;
-        return $this;
-    }
     
     /**
      * @return  bool
@@ -32,6 +16,7 @@ public function saveQuizResult(User $user, $results)
     $db = DB::getInstance();
     
     $id=$user->getId();
+    $this->results=(int)$this->results;
     $quiz_results=$this->results;
     $createdAt=new DateTime();
     $createdAt = $createdAt->format('Y-m-d H:i:s');

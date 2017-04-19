@@ -21,6 +21,7 @@ if (!empty($_POST)) {
     else {
         
         $userData = [
+            'username'=>$username,
             'email' => $email,
             'password' => $password,
         ];

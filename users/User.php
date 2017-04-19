@@ -214,7 +214,7 @@ class User extends Entity implements Serializable
         $createdAt = $this->getCreatedAt()->format('Y-m-d H:i:s');
         
         // подготовка запроса
-        $query = "INSERT INTO users (username,email,password,createdAt) " .
+        $query = "INSERT INTO users (username,email,password,created_at) " .
                     "VALUES ('$username','$email','$password','$createdAt')";
         
         // выполнение запроса

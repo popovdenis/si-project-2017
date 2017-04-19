@@ -34,7 +34,7 @@
                             </div>
                             <hr/>
 <!--                            <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp;-->
-                            <a href="users/logout.php" class="btn btn-danger btn-sm">Logout</a>
+                            <a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
                         <?php endif; ?>
                     </li>
                 </ul>
