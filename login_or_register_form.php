@@ -25,8 +25,6 @@
                     </div>
                 <?php endif ?>
                 <form action="users/login_handler.php" method="POST">
-                    <label>Enter Username : </label>
-                    <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>
                     <label>Enter Email: </label>
                     <input type="text" name="email" value="" placeholder="enter email" class="form-control"/>
                     <label>Enter Password : </label>

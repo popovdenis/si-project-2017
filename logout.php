@@ -1,5 +1,5 @@
 <?php
-include_once realpath(__DIR__ . '/../config.php');
+include_once realpath(__DIR__ . '/config.php');
 
 session_start();
 
