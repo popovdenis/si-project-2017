@@ -12,24 +12,13 @@ if (!empty($_POST)) {
     $confirmation = isset($_POST['confirmation']) ? strip_tags(trim($_POST['confirmation'])) : '';
     
     $result = false;
-
-    if (empty($username && $email && $password && $confirmation))
-    
-    {
+    if (empty($username && $email && $password && $confirmation)) {
         $error = 'Fill in the form field!';
-    }
-    
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
-    {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Email format wrong!';
-    }
-    
-    elseif ($password != $confirmation)
-    {
+    } elseif ($password != $confirmation) {
         $error = 'Passwords do not match!';
-    }
-    
-    else {
+    } else {
         $userData = [
             'username' => $username,
             'email' => $email,
@@ -39,21 +28,17 @@ if (!empty($_POST)) {
         $user = new User($userData);
         $result = $user->save();
         
-        if ($result==true) {
+        if ($result) {
             $success = 'You successfully registered, ' . $user->getUsername() . '!';
             $_SESSION['userdata'] = serialize($user);
         }
     }
     
-
-    if (!empty($error))
-    {
+    if (!empty($error)) {
         $_SESSION['error_register'] = $error;
         header('location: ' . SITE . '/login_or_register_form.php');
-    }
-    elseif(!empty($success))
-    {
-        $_SESSION['success']=$success;
+    } elseif (!empty($success)) {
+        $_SESSION['success'] = $success;
         header('location: ' . SITE);
     }
 }

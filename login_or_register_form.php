@@ -10,15 +10,11 @@
         <div class="row">
             <div class="col-md-12">
                 <h4 class="page-head-line">Please Login Or Register To Enter </h4>
-
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                
-                
                 <h4> Login </h4>
-                
                 <?php if (!empty($_SESSION['error_login'])) : ?>
                     <div class="alert alert-danger">
                         <?php
@@ -28,12 +24,6 @@
                         ?>
                     </div>
                 <?php endif ?>
-                
-                
-                
-                
-                
-                
                 <form action="users/login_handler.php" method="POST">
                     <label>Enter Username : </label>
                     <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>
@@ -47,14 +37,8 @@
                 </form>
             </div>
             
-            
-            
-            
-            
-            
             <div class="col-md-6">
                 <h4> Or Register </h4>
-                
                 <?php if (!empty($_SESSION['error_register'])) : ?>
                     <div class="alert alert-danger">
                         <?php
@@ -64,7 +48,6 @@
                         ?>
                     </div>
                 <?php endif ?>
-            
                 <form action="users/register_handler.php" method="POST">
                     <label>Enter Username : </label>
                     <input type="text" name="username" value="" placeholder="enter your name" class="form-control"/>
@@ -80,6 +63,7 @@
                         class="glyphicon glyphicon-user"></span>
                 </form>
             </div>
+            
         </div>
     </div>
 </div>

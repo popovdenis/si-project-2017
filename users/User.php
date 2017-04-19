@@ -214,7 +214,7 @@ class User extends Entity implements Serializable
         $createdAt = $this->getCreatedAt()->format('Y-m-d H:i:s');
         
         // подготовка запроса
-        $query = "INSERT INTO users (username,email,password,createdAt) " .
+        $query = "INSERT INTO users (username,email,password,created_at) " .
                     "VALUES ('$username','$email','$password','$createdAt')";
         
         // выполнение запроса
@@ -235,21 +235,19 @@ class User extends Entity implements Serializable
      */
     public function getByEmailAndPassword()
     {
-        $db=DB::getInstance();
+        $db = DB::getInstance();
         
-        $username = $this->escape($this->getUsername());
         $email = $this->escape($this->getEmail());
-        $password = $this->escape($this->getPassword());
-      
-        $query="SELECT * FROM users WHERE email = '$email' ";
+        $password = $this->getPassword();
         
-        $result=$db->query($query);
-    
-        if (!$result) {die($db->error);}
+        $query = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
+        $result = $db->query($query);
+        if (!$result) {
+            die($db->error);
+        }
         
-         $row = $result->fetch_assoc();
-    
-      return $row;
-         
+        $row = $result->fetch_assoc();
+        
+        return $row;
     }
 }

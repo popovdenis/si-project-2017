@@ -58,4 +58,5 @@ if (!empty($_POST)) {
     $_SESSION['message'] = $message;
     $_SESSION['result'] = $result;
 }
+
 header('Location:' . SITE . '/' . 'quiz.php');

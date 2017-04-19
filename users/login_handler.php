@@ -10,7 +10,6 @@ if (!empty($_POST)) {
     $email = isset($_POST['email']) ? strip_tags(trim($_POST['email'])) : '';
     $password = isset($_POST['password']) ? strip_tags(trim($_POST['password'])) : '';
     
-    
     if (empty($username && $email && $password)) {
         $error = 'Fill in the form field!';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -21,33 +20,18 @@ if (!empty($_POST)) {
             'email' => $email,
             'password' => $password,
         ];
-        
-        $user = new User($userData);
-        $result = $user->getByEmailAndPassword();
-        
-        
-        if ($username !== $result['username']) {
-            $error = 'Username wrong !';
-        } elseif ($email !== $result['email']) {
-            $error = '@email Wrong !';
-        } elseif (md5($password) !== $result['password']) {
-            $error = 'Password Wrong !';
-        }
-        
-        
-        if ($username === $result['username'] && $email === $result['email']
-            && md5($password) === $result['password']
-        ) {
-            $success = 'You logged in successfully, hello :) ' . $user->getUsername() . '!';
-            $_SESSION['userdata'] = serialize($user);
-        } elseif ($username !== $result['username'] && $email !== $result['email']
-            && md5($password) !== $result['password']
-        ) {
-            $error = 'There is no such user, please register.';
-        }
-        
-    }
     
+        $userObj = new User($userData);
+        $userData = $userObj->getByEmailAndPassword();
+        
+        if (!$userData) {
+            $error = 'User with such email and login is not found.';
+        } else {
+            $userObj->setId($userData['id']);
+            $success = 'You logged in successfully, hello :) ' . $userObj->getUsername() . '!';
+            $_SESSION['userdata'] = serialize($userObj);
+        }
+    }
     
     if (!empty($error)) {
         $_SESSION['error_login'] = $error;
@@ -56,5 +40,4 @@ if (!empty($_POST)) {
         $_SESSION['success'] = $success;
         header('location: ' . SITE);
     }
-    
 }
