@@ -7,11 +7,6 @@
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h4 class="page-head-line">Quiz</h4>
-            </div>
-        </div>
         <div align="center" style="margin: 10%">
             <p> The test contains 50 questions. Good luck! </p>
             <form action="quizHandler.php" method="POST">

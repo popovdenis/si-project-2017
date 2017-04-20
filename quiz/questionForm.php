@@ -10,11 +10,6 @@ $questionTitle = isset($questions[$question]) ? $questions[$question] : '';
 <div class="content-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h4 class="page-head-line">Quiz</h4>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-body">
