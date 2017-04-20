@@ -18,14 +18,14 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                             <span class="glyphicon glyphicon-user" style="font-size: 25px;"></span>
                         </a>
-                        <div class="dropdown-menu dropdown-settings">
                         <?php
                         if (isset($_SESSION['userdata'])) :
-                            /**
-                             * @var $user User
-                             */
-                            $user = unserialize($_SESSION['userdata']);
+                        /**
+                         * @var $user User
+                         */
+                        $user = unserialize($_SESSION['userdata']);
                         ?>
+                        <div class="dropdown-menu dropdown-settings">
                             <div class="media">
                                 <div class="media-body">
                                     <h4 class="media-heading"><?php echo $user->getUsername() ?> </h4>
@@ -35,6 +35,7 @@
                             <hr/>
 <!--                            <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp;-->
                             <a href="<?php echo SITE ?>/logout.php" class="btn btn-danger btn-sm">Logout</a>
+                        </div>
                         <?php endif; ?>
                     </li>
                 </ul>
