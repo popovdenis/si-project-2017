@@ -1,5 +1,6 @@
-<?php require_once 'header.php' ?>
-<?php require_once 'navbar.php' ?>
+<?php require_once "header.php" ?>
+<?php require_once 'navbar.php'; ?>
+
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
 <?php require_once 'menu.php' ?>
@@ -8,55 +9,49 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="page-head-line">Dashboard</h4>
+                <h1 class="page-head-line">Questions and Answers </h1>
             </div>
         </div>
+        <?php if (isset($_SESSION['message'])) : ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <?php $cssClass = (isset($_SESSION['result']) && !$_SESSION['result']) ? 'alert-danger' : 'alert-success'; ?>
+                    <div class="alert <?php echo $cssClass ?>"><?php echo $_SESSION['message'] ?></div>
+                </div>
+            </div>
+            <?php unset($_SESSION['message']); ?>
+            <?php unset($_SESSION['result']); ?>
+        <?php endif ?>
         <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="dashboard-div-wrapper bk-clr-one">
-                    <i  class="fa fa-venus dashboard-div-icon" ></i>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                        </div>
-                    
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form action="quiz/handler.php" method="POST" style="align-content: center">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Enter the question</label>
+                                <input type="text" class="form-control" name="question" placeholder="Enter question">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Enter answers:</label>
+                                <?php for ($i = 1; $i <= 4; $i++) : ?>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="answer_check[<?php echo $i ?>]" value="1" />
+                                        </label>
+                                        <input class="form-control display-inline width95"
+                                               type="text" name="answers[<?php echo $i ?>]" value=""
+                                               placeholder="enter the answer <?php echo $i ?>" />
+                                    </div>
+                                <?php endfor; ?>
+                            </div>
+                            <hr />
+                            <button type="submit" class="btn btn-primary btn-sm btn-wide">Save</button>
+                        </form>
                     </div>
-                    <h5>Simple Text Here </h5>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="dashboard-div-wrapper bk-clr-two">
-                    <i  class="fa fa-edit dashboard-div-icon" ></i>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                        </div>
-                    
-                    </div>
-                    <h5>Simple Text Here </h5>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="dashboard-div-wrapper bk-clr-three">
-                    <i  class="fa fa-cogs dashboard-div-icon" ></i>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                        </div>
-                    
-                    </div>
-                    <h5>Simple Text Here </h5>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="dashboard-div-wrapper bk-clr-four">
-                    <i  class="fa fa-bell-o dashboard-div-icon" ></i>
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-                        </div>
-                    
-                    </div>
-                    <h5>Simple Text Here </h5>
                 </div>
             </div>
         </div>
+        <a href="quiz/start.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
     </div>
 </div>
 <!-- CONTENT-WRAPPER SECTION END-->

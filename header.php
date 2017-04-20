@@ -1,4 +1,5 @@
-<?php require_once 'config.php' ?>
+<?php require_once 'autoload.php' ?>
+<?php  session_start(); ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php require_once 'head.php' ?>
@@ -11,7 +12,7 @@
                 &nbsp;&nbsp;
                 <strong>Support: </strong>+90-897-678-44
             </div>
-        
+
         </div>
     </div>
 </header>

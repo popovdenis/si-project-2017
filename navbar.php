@@ -6,42 +6,37 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">
-                
-                <img src="assets/img/logo.png" />
+            <a class="navbar-brand" href="<?php echo SITE ?>">
+                <span>SI Project</span>
             </a>
-        
         </div>
-        
+
         <div class="left-div">
             <div class="user-settings-wrapper">
                 <ul class="nav">
-                    
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                             <span class="glyphicon glyphicon-user" style="font-size: 25px;"></span>
                         </a>
                         <div class="dropdown-menu dropdown-settings">
+                        <?php
+                        if (isset($_SESSION['userdata'])) :
+                            /**
+                             * @var $user User
+                             */
+                            $user = unserialize($_SESSION['userdata']);
+                        ?>
                             <div class="media">
-                                <a class="media-left" href="#">
-                                    <img src="assets/img/64-64.jpg" alt="" class="img-rounded" />
-                                </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading">Jhon Deo Alex </h4>
-                                    <h5>Developer & Designer</h5>
-                                
+                                    <h4 class="media-heading"><?php echo $user->getUsername() ?> </h4>
+                                    <h5><?php echo $user->getEmail() ?></h5>
                                 </div>
                             </div>
-                            <hr />
-                            <h5><strong>Personal Bio : </strong></h5>
-                            Anim pariatur cliche reprehen derit.
-                            <hr />
-                            <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp; <a href="login.html" class="btn btn-danger btn-sm">Logout</a>
-                        
-                        </div>
+                            <hr/>
+<!--                            <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp;-->
+                            <a href="<?php echo SITE ?>/logout.php" class="btn btn-danger btn-sm">Logout</a>
+                        <?php endif; ?>
                     </li>
-                
-                
                 </ul>
             </div>
         </div>

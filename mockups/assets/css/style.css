@@ -316,34 +316,3 @@ footer {
 .btn-google {
     background-color: #c32f10;
 }
-
-h5 a {
-    text-decoration: none;
-    color: white;
-}
-
-h5 a:hover {
-    color: white;
-}
-
-.btn-wide {
-    padding-left: 34px;
-    padding-right: 34px;
-    font-size: 15px;
-}
-
-.display-inline {
-    display: inline;
-}
-
-.width95 {
-    width: 95%;
-}
-
-.navbar-brand span {
-    color: white;
-    font-size: 20px;
-    margin-top: 25px;
-    display: block;
-    text-transform: uppercase;
-}
