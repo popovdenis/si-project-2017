@@ -7,31 +7,32 @@ $questions = [];
 if (!isset($_SESSION['finish_quiz'])) {
     if (isset($_POST["question"])) {
         $question = (int)$_POST["question"];
+        $questionId = (int)$_POST["questionId"];
         if ($_POST["question"] > 0) {
             if (empty($_SESSION["answers"])) {
                 $_SESSION["answers"] = [];
             }
-            if (isset($_POST["answer"])) {
-                $_SESSION["answers"][$question] = $_POST["answer"];
-            } else {
-                $_SESSION["answers"][$question] = null;
+            if (!isset($_POST["answer"][$questionId])) {
+                $_SESSION["answers"][$questionId] = null;
             }
+            $_SESSION["answers"][$questionId] = $_POST["answer"];
+            
             $answers = $_SESSION["answers"];
         }
         $question++;
     }
-    
-    if (!isset($_SESSION['questions'])) {
-        $questions = Question::getQuestionsFromDB();
-        $_SESSION['questions'] = serialize($questions);
-    } else {
-        $questions = unserialize($_SESSION['questions']);
-    }
+}
+
+if (!isset($_SESSION['questions'])) {
+    $questions = Question::getQuestionsFromDB();
+    $_SESSION['questions'] = serialize($questions);
+} else {
+    $questions = unserialize($_SESSION['questions']);
 }
 ?>
 <?php
-if (isset($_SESSION['finish_quiz'])) {
-    unset($_SESSION['finish_quiz']);
+if (isset($_SESSION['quiz_finish'])) {
+    unset($_SESSION['quiz_finish']);
     include "start.php";
 } else {
     if (count($questions) == count($answers)) {

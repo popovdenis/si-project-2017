@@ -98,17 +98,19 @@ class Question extends Entity
         // получение экземпляра класса DB
         $db = DB::getInstance();
     
-        $query = "SELECT * FROM questions";
+        $query = "SELECT * FROM questions ORDER BY RAND()";
         $result = $db->query($query);
         if (!$result) {
             die($db->error);
         }
-        
-        $array = [];
+    
+        $questions = [];
+        $index = 1;
         while ($question = $result->fetch_assoc()) {
-            $array[$question['id']] = $question['question'];
+            $questions[$index] = $question;
+            $index++;
         }
         
-        return $array;
+        return $questions;
     }
 }

@@ -3,7 +3,7 @@ $result = 0;
 $questions = [];
 if (!empty($_SESSION["answers"]) && !empty($_SESSION['questions'])) {
     $questions = unserialize($_SESSION['questions']);
-    $questionsIds = array_keys($questions);
+    $questionsIds = array_column($questions, 'id');
     $correctAnswersIds = QuestionAnswer::getAnswersByQuestionsIds($questionsIds);
     
     $userAnswers = $_SESSION["answers"];
@@ -15,7 +15,8 @@ if (!empty($_SESSION["answers"]) && !empty($_SESSION['questions'])) {
     }
     unset($_SESSION['answers']);
     unset($_SESSION['questions']);
-    $_SESSION['finish_quiz'] = true;
+    unset($_SESSION['quiz_start']);
+    $_SESSION['quiz_finish'] = true;
 }
 ?>
 <?php require_once __DIR__ . "/../header.php" ?>
