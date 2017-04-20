@@ -53,7 +53,7 @@ $questionPercent = Quiz::getQuizProgressPercent();
                                         <label>
                                             <input type="radio" name="answer" value="<?php echo $answer['id'] ?>"/>
                                         </label>
-                                        <?php echo $answer['answer'] ?>
+                                        <?php echo htmlspecialchars($answer['answer']) ?>
                                     </div>
                                 <?php endforeach; ?>
                                 <hr/>

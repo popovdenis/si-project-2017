@@ -61,7 +61,7 @@
             Quiz::finishQuiz();
         }
         ?>
-        <a href="quiz/quizHandler.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
+        <a href="quiz/start.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
     </div>
 </div>
 <!-- CONTENT-WRAPPER SECTION END-->
