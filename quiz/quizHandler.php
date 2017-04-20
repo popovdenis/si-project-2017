@@ -1,14 +1,33 @@
 <?php
 include_once realpath(__DIR__ . '/../autoload.php');
 
+if (isset($_POST["cancel_quiz"])) {
+    if ((bool) $_POST["cancel_quiz"] && Quiz::isQuizStarted()) {
+        header('Location: ' . SITE . '/quiz/result.php');
+        exit;
+    }
+}
+
 if (isset($_POST["question"])) {
     $question = (int) $_POST["question"];
     $questionId = (int) $_POST["questionId"];
-    if ($question > 0) {
-        Quiz::saveAnswer($questionId, $_POST["answer"]);
+    $answer = isset($_POST["answer"]) ? (int) $_POST["answer"] : 0;
+    
+    $result = false;
+    $message = '';
+    if ($question > 0 && empty($answer)) {
+        $message = 'Please choose any answer!';
+    } else {
+        if ($question > 0) {
+            Quiz::saveAnswer($questionId, $answer);
+        }
+        $question++;
+        Quiz::setCurrentQuestionIndex($question);
+        $result = true;
     }
-    $question++;
-    Quiz::setCurrentQuestionIndex($question);
+    
+    $_SESSION['message'] = $message;
+    $_SESSION['result'] = $result;
 }
 
 if (!Quiz::isQuizStarted()) {

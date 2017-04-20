@@ -99,6 +99,9 @@ class Question extends Entity
         $db = DB::getInstance();
     
         $query = "SELECT * FROM questions ORDER BY RAND()";
+        if (!empty(QUIZ_LIMIT) && is_numeric(QUIZ_LIMIT)) {
+            $query .= ' limit 0, ' . QUIZ_LIMIT;
+        }
         $result = $db->query($query);
         if (!$result) {
             die($db->error);

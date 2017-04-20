@@ -12,7 +12,7 @@
                 <h1 class="page-head-line">Questions and Answers </h1>
             </div>
         </div>
-        <?php if (isset($_SESSION['message'])) : ?>
+        <?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) : ?>
             <div class="row">
                 <div class="col-md-12">
                     <?php

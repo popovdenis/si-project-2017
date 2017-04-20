@@ -7,3 +7,6 @@ password = ''
 dbname = 'si_project'
 port = 3306
 charset = UTF8
+
+[quiz]
+limit = 50
