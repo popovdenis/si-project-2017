@@ -28,16 +28,16 @@ if (!empty($_POST)) {
         
         $userObj = new User($userData);
        $userObj->getByEmailAndPassword();
-        
-        
-        if (!empty($userObj)) {
-            $success = 'You logged in successfully, hello :) ' . $userObj->getByEmailAndPassword()['username'] . '!';
-            $_SESSION['userdata'] = serialize($userObj);
-         
-        }
-        else
+       
+        if(empty($userObj->getByEmailAndPassword()))
         {
             $error = 'There is no such user, please register.';
+        }
+        
+        elseif (!empty($userObj->getByEmailAndPassword())) {
+            $success = 'You logged in successfully, hello :) ' . $userObj->getByEmailAndPassword()['username'] . '!';
+            $_SESSION['userdata'] = serialize($userObj);
+        
         }
         
     }
@@ -52,3 +52,4 @@ if (!empty($_POST)) {
     }
     
 }
+
