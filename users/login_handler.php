@@ -6,13 +6,13 @@ if (!session_id()) {
 }
 
 if (!empty($_POST)) {
-    $username = isset($_POST['username']) ? strip_tags(trim($_POST['username'])) : '';
+
     $email = isset($_POST['email']) ? strip_tags(trim($_POST['email'])) : '';
     $password = isset($_POST['password']) ? strip_tags(trim($_POST['password'])) : '';
     
     $result=false;
     
-    if (empty($username && $email && $password)) {
+    if (empty( $email && $password)) {
         $error = 'Fill in the form field!';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Email format wrong!';
@@ -21,18 +21,19 @@ if (!empty($_POST)) {
     else {
         
         $userData = [
-            'username'=>$username,
+     
             'email' => $email,
             'password' => $password,
         ];
         
-        $user = new User($userData);
-        $result = $user->getByEmailAndPassword();
+        $userObj = new User($userData);
+       $userObj->getByEmailAndPassword();
         
         
-        if ($result==true) {
-            $success = 'You logged in successfully, hello :) ' . $user->getUsername() . '!';
-            $_SESSION['userdata'] = serialize($user);
+        if (!empty($userObj)) {
+            $success = 'You logged in successfully, hello :) ' . $userObj->getByEmailAndPassword()['username'] . '!';
+            $_SESSION['userdata'] = serialize($userObj);
+         
         }
         else
         {

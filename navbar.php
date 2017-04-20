@@ -28,8 +28,8 @@
                         ?>
                             <div class="media">
                                 <div class="media-body">
-                                    <h4 class="media-heading"><?php echo $user->getUsername() ?> </h4>
-                                    <h5><?php echo $user->getEmail() ?></h5>
+                                    <h4 class="media-heading"><?php //echo $user['username'] ?> </h4>
+                                    <h5><?php //echo $user['email'] ?></h5>
                                 </div>
                             </div>
                             <hr/>

@@ -231,7 +231,7 @@ class User extends Entity implements Serializable
     }
     
     /**
-     * @return bool
+     * @return array
      */
     public function getByEmailAndPassword()
     {
@@ -246,7 +246,9 @@ class User extends Entity implements Serializable
     
         if (!$result) {die($db->error);}
         
-      return $result==true;
+        $row=$result->fetch_assoc();
+        
+      return $row;
          
     }
 }
