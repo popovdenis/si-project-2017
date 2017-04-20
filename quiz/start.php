@@ -1,21 +1,25 @@
-<?php require_once "quizHead.php" ?>
-<?php require_once "../header.php" ?>
-<?php require_once '../navbar.php'; ?>
-
-    <!-- LOGO HEADER END-->
+<?php require_once __DIR__ . "/../header.php" ?>
+<?php require_once BASE_PATH . '/navbar.php'; ?>
+<!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
-<?php require_once '../menu.php' ?>
-    <!-- MENU SECTION END-->
+<?php require_once BASE_PATH . '/menu.php' ?>
 
-    <div class="content-wrapper">
-        <div class="container">
-            <div align="center" style="margin: 10%">
-                <p> The test contains 50 questions. Good luck! </p>
-                <form action="quizHandler.php" method="POST">
-                    <input type="hidden" name="question" value=" <?php echo 0 ?> ">
-                    <input type="submit" class="btn btn-primary btn-sm btn-wide" value="Start the quiz">
-                </form>
+<!-- MENU SECTION END-->
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line">Quiz</h4>
             </div>
         </div>
+        <div align="center" style="margin: 10%">
+            <p> The test contains 50 questions. Good luck! </p>
+            <form action="quizHandler.php" method="POST">
+                <input type="hidden" name="question" value=" <?php echo 0 ?> ">
+                <input type="submit" class="btn btn-primary btn-sm btn-wide" value="Start the quiz">
+            </form>
+        </div>
     </div>
-<?php require_once '../footer.php' ?>
+</div>
+
+<?php require_once BASE_PATH . '/footer.php' ?>

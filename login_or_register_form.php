@@ -28,7 +28,7 @@
                     <label>Enter Email: </label>
                     <input type="text" name="email" value="" placeholder="enter email" class="form-control"/>
                     <label>Enter Password : </label>
-                    <input type="password" name="password" value="" placeholder="enter password" class="form-control"/>
+                    <input type="password" name="password" value="" placeholder="enter password" class="form-control" />
                     <hr/>
                     <input type="submit" value="&nbsp;Log Me In&nbsp;" class="btn btn-info" <span
                         class="glyphicon glyphicon-user"></span>

@@ -5,7 +5,8 @@ if (!session_id()) {
     session_start();
 }
 
-$question = $answers = 0;
+$question = 1;
+$answers = 0;
 if (isset($_POST["question"])) {
     $question = (int)$_POST["question"];
     if ($_POST["question"] > 0) {
