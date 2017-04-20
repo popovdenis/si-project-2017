@@ -1,8 +1,7 @@
-<?php require_once 'autoload.php' ?>
-<?php  session_start(); ?>
+<?php require_once __DIR__ . '/autoload.php' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php require_once 'head.php' ?>
+<?php require_once BASE_PATH . '/head.php' ?>
 <body>
 <header>
     <div class="container">
