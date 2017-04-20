@@ -4,7 +4,8 @@
 <?php $title = QUIZ; ?>
 <?php require_once BASE_PATH . '/menu.php' ?>
 <?php $questionTitle = isset($questions[$question]) ? $questions[$question] : ''; ?>
-<?php $questionPercent = (($question * 100) / count($questions)) - 5 ?>
+<?php $questionPercent = floor((($question * 100) / count($questions))) ?>
+<?php $questionPercent = $questionPercent == 100 ? 96 : $questionPercent ?>
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
     <div class="container">
