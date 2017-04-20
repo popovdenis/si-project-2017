@@ -7,15 +7,16 @@ if (!session_id()) {
 
 $question = $answers = 0;
 if (isset($_POST["question"])) {
-    $question = (int) $_POST["question"];
+    $question = (int)$_POST["question"];
     if ($_POST["question"] > 0) {
         if (empty($_SESSION["answers"])) {
             $_SESSION["answers"] = [];
         }
-        if (!isset($_POST["answer"])) {
+        if (isset($_POST["answer"])) {
+            $_SESSION["answers"][$question] = $_POST["answer"];
+        } else {
             $_SESSION["answers"][$question] = null;
         }
-        $_SESSION["answers"][$question] = (int) trim($_POST["answer"]);
         $answers = $_SESSION["answers"];
     }
     $question++;
