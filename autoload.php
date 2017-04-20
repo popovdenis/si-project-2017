@@ -6,6 +6,7 @@ require_once BASE_PATH . '/users/User.php';
 require_once BASE_PATH . '/quiz/Answer.php';
 require_once BASE_PATH . '/quiz/Question.php';
 require_once BASE_PATH . '/quiz/QuestionAnswer.php';
+require_once BASE_PATH . '/quiz/Quiz.php';
 
 if (!session_id()) {
     session_start();

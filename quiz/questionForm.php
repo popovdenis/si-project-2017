@@ -3,9 +3,11 @@
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
 <?php require_once BASE_PATH . '/menu.php' ?>
-<?php $questionTitle = isset($questions[$question]) ? $questions[$question]['question'] : ''; ?>
-<?php $questionPercent = floor((($question * 100) / count($questions))) ?>
-<?php $questionPercent = $questionPercent == 100 ? 96 : $questionPercent ?>
+<?php
+    $currentQuestion = Quiz::getCurrentQuestion();
+    $questionTitle = $currentQuestion['question'];
+    $questionPercent = Quiz::getQuizProgressPercent();
+?>
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
     <div class="container">
@@ -25,7 +27,7 @@
                             <hr />
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Answers:</label>
-                                <?php $answers = Answer::getAnswersFromDBByQuestionId($questions[$question]['id']) ?>
+                                <?php $answers = Answer::getAnswersFromDBByQuestionId($currentQuestion['id']) ?>
                                 <?php shuffle($answers) ?>
                                 <?php foreach ($answers as $answer) : ?>
                                     <div class="radio">
@@ -36,8 +38,8 @@
                                     </div>
                                 <?php endforeach; ?>
                                 <hr />
-                                <input type="hidden" name="question" value="<?php echo $question; ?>">
-                                <input type="hidden" name="questionId" value="<?php echo $questions[$question]['id']; ?>">
+                                <input type="hidden" name="question" value="<?php echo Quiz::getCurrentQuestionIndex(); ?>">
+                                <input type="hidden" name="questionId" value="<?php echo $currentQuestion['id']; ?>">
                                 <input type="submit" class="btn btn-info" value="Next question">
                             </div>
                         </form>

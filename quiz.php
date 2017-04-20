@@ -51,6 +51,11 @@
                 </div>
             </div>
         </div>
+<?php
+if (Quiz::isQuizStarted()) {
+    Quiz::finishQuiz();
+}
+?>
         <a href="quiz/quizHandler.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
     </div>
 </div>

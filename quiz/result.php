@@ -1,29 +1,18 @@
-<?php
-$result = 0;
-$questions = [];
-if (!empty($_SESSION["answers"]) && !empty($_SESSION['questions'])) {
-    $questions = unserialize($_SESSION['questions']);
-    $questionsIds = array_column($questions, 'id');
-    $correctAnswersIds = QuestionAnswer::getAnswersByQuestionsIds($questionsIds);
-    
-    $userAnswers = $_SESSION["answers"];
-    
-    foreach ($userAnswers as $questionId => $answerId) {
-        if (isset($correctAnswersIds[$questionId]) && $correctAnswersIds[$questionId] == $answerId) {
-            $result++;
-        }
-    }
-    unset($_SESSION['answers']);
-    unset($_SESSION['questions']);
-    unset($_SESSION['quiz_start']);
-    $_SESSION['quiz_finish'] = true;
-}
-?>
 <?php require_once __DIR__ . "/../header.php" ?>
 <?php require_once BASE_PATH . '/navbar.php'; ?>
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
 <?php require_once BASE_PATH . '/menu.php' ?>
+
+<?php
+$questionsCount = $correctAnswers = 0;
+if (Quiz::isQuizStarted()) {
+    Quiz::calculateCorrectAnswers();
+    $questionsCount = Quiz::getQuestionsCount();
+    $correctAnswers = Quiz::getCorrectAnswers();
+    Quiz::finishQuiz();
+}
+?>
 
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
@@ -35,7 +24,7 @@ if (!empty($_SESSION["answers"]) && !empty($_SESSION['questions'])) {
         </div>
         <div class="row">
             <div class="col-md-12" align="center">
-                <p> Your result is <?php echo $result ?> from <?php echo count($questions) ?> </p>
+                <p> Your result is <?php echo $correctAnswers ?> from <?php echo $questionsCount ?> </p>
                 <p><a href="<?php echo SITE ?>/quiz/quizHandler.php"> Start the test again </a></p>
             </div>
         </div>

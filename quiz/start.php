@@ -7,7 +7,7 @@
 <div class="content-wrapper">
     <div class="container">
         <div align="center" style="margin: 10%">
-            <p> The test contains <?php echo count($questions) ?> questions. Good luck! </p>
+            <p> The test contains <?php echo Quiz::getQuestionsCount() ?> questions. Good luck! </p>
             <form action="quizHandler.php" method="POST">
                 <input type="hidden" name="question" value=" <?php echo 0 ?> ">
                 <input type="hidden" name="questionId" value=" <?php echo 0 ?> ">
