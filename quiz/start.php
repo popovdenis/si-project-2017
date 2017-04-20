@@ -3,7 +3,6 @@
 <!-- LOGO HEADER END-->
 <?php $title = QUIZ; ?>
 <?php require_once BASE_PATH . '/menu.php' ?>
-<?php $_SESSION['quiz_start'] = true ?>
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
     <div class="container">

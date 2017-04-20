@@ -20,6 +20,7 @@ if (!isset($_SESSION['finish_quiz'])) {
             $answers = $_SESSION["answers"];
         }
         $question++;
+        $_SESSION['quiz_start'] = true;
     }
 }
 
@@ -31,6 +32,14 @@ if (!isset($_SESSION['questions'])) {
 }
 ?>
 <?php
+if (empty($questions)) {
+    unset($_SESSION['answers']);
+    unset($_SESSION['questions']);
+    unset($_SESSION['quiz_start']);
+    $_SESSION['quiz_finish'] = true;
+    header('Location: ' . SITE . '/quiz.php');
+    exit;
+}
 if (isset($_SESSION['quiz_finish'])) {
     unset($_SESSION['quiz_finish']);
     include "start.php";
