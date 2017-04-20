@@ -1,10 +1,6 @@
 <?php
 include_once realpath(__DIR__ . '/../autoload.php');
 
-if (!session_id()) {
-    session_start();
-}
-
 $question = $answers = 0;
 $questions = [];
 

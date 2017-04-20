@@ -1,12 +1,5 @@
 <?php
-require_once '../core/DB.php';
-require_once 'Question.php';
-require_once 'Answer.php';
-require_once 'QuestionAnswer.php';
-
-if (!session_id()) {
-    session_start();
-}
+include_once realpath(__DIR__ . '/../autoload.php');
 
 if (!empty($_POST)) {
     $questionFromPost = isset($_POST['question']) ? strip_tags(trim($_POST['question'])) : '';
