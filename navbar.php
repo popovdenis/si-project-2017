@@ -10,7 +10,6 @@
                 <span>SI Project</span>
             </a>
         </div>
-
         <div class="left-div">
             <div class="user-settings-wrapper">
                 <ul class="nav">
@@ -20,22 +19,22 @@
                         </a>
                         <?php
                         if (isset($_SESSION['userdata'])) :
-                        /**
-                         * @var $user User
-                         */
-                        $user = unserialize($_SESSION['userdata']);
-                        ?>
-                        <div class="dropdown-menu dropdown-settings">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h4 class="media-heading"><?php echo $user->getUsername() ?> </h4>
-                                    <h5><?php echo $user->getEmail() ?></h5>
+                            /**
+                             * @var $user User
+                             */
+                            $user = unserialize($_SESSION['userdata']);
+                            ?>
+                            <div class="dropdown-menu dropdown-settings">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><?php echo $user->getUsername() ?> </h4>
+                                        <h5><?php echo $user->getEmail() ?></h5>
+                                    </div>
                                 </div>
+                                <hr/>
+                                <!--                            <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp;-->
+                                <a href="<?php echo SITE ?>/logout.php" class="btn btn-danger btn-sm">Logout</a>
                             </div>
-                            <hr/>
-<!--                            <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp;-->
-                            <a href="<?php echo SITE ?>/logout.php" class="btn btn-danger btn-sm">Logout</a>
-                        </div>
                         <?php endif; ?>
                     </li>
                 </ul>

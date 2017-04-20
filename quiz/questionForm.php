@@ -4,9 +4,9 @@
 <?php $title = QUIZ; ?>
 <?php require_once BASE_PATH . '/menu.php' ?>
 <?php
-    $currentQuestion = Quiz::getCurrentQuestion();
-    $questionTitle = $currentQuestion['question'];
-    $questionPercent = Quiz::getQuizProgressPercent();
+$currentQuestion = Quiz::getCurrentQuestion();
+$questionTitle = $currentQuestion['question'];
+$questionPercent = Quiz::getQuizProgressPercent();
 ?>
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
@@ -15,7 +15,8 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form action="<?php echo SITE ?>/quiz/quizHandler.php" method="POST" style="align-content: center">
+                        <form action="<?php echo SITE ?>/quiz/quizHandler.php" method="POST"
+                              style="align-content: center">
                             <div class="progress progress-striped">
                                 <div class="progress-bar progress-bar-success" role="progressbar"
                                      aria-valuenow="<?php echo $questionPercent ?>" aria-valuemin="0"
@@ -24,7 +25,7 @@
                                 </div>
                             </div>
                             <label>Question: <?php echo $questionTitle ?></label>
-                            <hr />
+                            <hr/>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Answers:</label>
                                 <?php $answers = Answer::getAnswersFromDBByQuestionId($currentQuestion['id']) ?>
@@ -32,13 +33,14 @@
                                 <?php foreach ($answers as $answer) : ?>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="answer" value="<?php echo $answer['id'] ?>" />
+                                            <input type="radio" name="answer" value="<?php echo $answer['id'] ?>"/>
                                         </label>
                                         <?php echo $answer['answer'] ?>
                                     </div>
                                 <?php endforeach; ?>
-                                <hr />
-                                <input type="hidden" name="question" value="<?php echo Quiz::getCurrentQuestionIndex(); ?>">
+                                <hr/>
+                                <input type="hidden" name="question"
+                                       value="<?php echo Quiz::getCurrentQuestionIndex(); ?>">
                                 <input type="hidden" name="questionId" value="<?php echo $currentQuestion['id']; ?>">
                                 <input type="submit" class="btn btn-info" value="Next question">
                             </div>

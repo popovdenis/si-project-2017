@@ -15,7 +15,12 @@
         <?php if (isset($_SESSION['message'])) : ?>
             <div class="row">
                 <div class="col-md-12">
-                    <?php $cssClass = (isset($_SESSION['result']) && !$_SESSION['result']) ? 'alert-danger' : 'alert-success'; ?>
+                    <?php
+                    $cssClass = 'alert-success';
+                    if (isset($_SESSION['result']) && !$_SESSION['result']) {
+                        $cssClass = 'alert-danger';
+                    }
+                    ?>
                     <div class="alert <?php echo $cssClass ?>"><?php echo $_SESSION['message'] ?></div>
                 </div>
             </div>
@@ -36,26 +41,26 @@
                                 <?php for ($i = 1; $i <= 4; $i++) : ?>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="answer_check[<?php echo $i ?>]" value="1" />
+                                            <input type="checkbox" name="answer_check[<?php echo $i ?>]" value="1"/>
                                         </label>
                                         <input class="form-control display-inline width95"
                                                type="text" name="answers[<?php echo $i ?>]" value=""
-                                               placeholder="enter the answer <?php echo $i ?>" />
+                                               placeholder="enter the answer <?php echo $i ?>"/>
                                     </div>
                                 <?php endfor; ?>
                             </div>
-                            <hr />
+                            <hr/>
                             <button type="submit" class="btn btn-primary btn-sm btn-wide">Save</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-<?php
-if (Quiz::isQuizStarted()) {
-    Quiz::finishQuiz();
-}
-?>
+        <?php
+        if (Quiz::isQuizStarted()) {
+            Quiz::finishQuiz();
+        }
+        ?>
         <a href="quiz/quizHandler.php" class="btn btn-primary btn-lg">Click to start the quiz</a>
     </div>
 </div>

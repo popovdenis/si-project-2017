@@ -2,8 +2,8 @@
 include_once realpath(__DIR__ . '/../autoload.php');
 
 if (isset($_POST["question"])) {
-    $question = (int)$_POST["question"];
-    $questionId = (int)$_POST["questionId"];
+    $question = (int) $_POST["question"];
+    $questionId = (int) $_POST["questionId"];
     if ($question > 0) {
         Quiz::saveAnswer($questionId, $_POST["answer"]);
     }
@@ -20,7 +20,7 @@ if (!Quiz::isQuizStarted()) {
     
     include "start.php";
 } elseif (Quiz::hasNextQuestion()) {
-        include "questionForm.php";
+    include "questionForm.php";
 } else {
     include "result.php";
 }

@@ -113,7 +113,7 @@ class Quiz
     /**
      * Save user's answer on the question.
      *
-     * @param int $questionId
+     * @param int   $questionId
      * @param array $answer
      */
     public static function saveAnswer($questionId, $answer)
@@ -147,7 +147,7 @@ class Quiz
             $questions = unserialize($_SESSION['questions']);
             $questionsIds = array_column($questions, 'id');
             $correctAnswersIds = QuestionAnswer::getAnswersByQuestionsIds($questionsIds);
-        
+            
             if (isset($_SESSION['answers'])) {
                 $userAnswers = $_SESSION['answers'];
                 foreach ($userAnswers as $questionId => $answerId) {
@@ -157,7 +157,7 @@ class Quiz
                 }
             }
         }
-    
+        
         self::$correctAnswersCount = $correctAnswers;
     }
     
