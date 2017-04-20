@@ -28,9 +28,9 @@
                         ?>
                             <div class="media">
                                 <div class="media-body">
-                                    <h4 class="media-heading"><?php ?> </h4>
+                                    <h4 class="media-heading"><?php echo $user=['username']?> </h4>
                                     
-                                    <h5><?php  ?></h5>
+                                    <h5><?php //echo ?></h5>
                                 </div>
                             </div>
                             <hr/>
