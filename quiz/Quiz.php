@@ -113,8 +113,8 @@ class Quiz
     /**
      * Save user's answer on the question.
      *
-     * @param int   $questionId
-     * @param array $answer
+     * @param int $questionId
+     * @param int $answer
      */
     public static function saveAnswer($questionId, $answer)
     {

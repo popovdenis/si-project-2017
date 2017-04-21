@@ -5,7 +5,6 @@
 <?php require_once BASE_PATH . '/menu.php' ?>
 <?php
 $currentQuestion = Quiz::getCurrentQuestion();
-$questionTitle = $currentQuestion['question'];
 $questionPercent = Quiz::getQuizProgressPercent();
 ?>
 <script>
@@ -42,7 +41,7 @@ $questionPercent = Quiz::getQuizProgressPercent();
                                     <span class="sr-only"><?php echo $questionPercent ?>% Complete (success)</span>
                                 </div>
                             </div>
-                            <label>Question: <?php echo $questionTitle ?></label>
+                            <p><strong>Question:</strong>&nbsp;<?php echo htmlspecialchars_decode($currentQuestion['question']) ?></p>
                             <hr/>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Answers:</label>
