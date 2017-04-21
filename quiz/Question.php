@@ -80,14 +80,16 @@ class Question extends Entity
         // экранирование переменных
         $question = $this->escape($this->getQuestion());
         // подготовка запроса
-        $query = "INSERT INTO questions (`question`) VALUES ('$question')";
+        $query = "INSERT INTO questions (`question`) VALUES (?)";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param('s', $question);
         // выполнение запроса
-        $result = $db->query($query);
+        $result = $stmt->execute();
         if (!$result) {
-            die($db->error);
+            die($stmt->error);
         }
         // save question and save insert_id to $this->id
-        $this->setId($db->insert_id);
+        $this->setId($stmt->insert_id);
         
         return true;
     }
@@ -98,9 +100,9 @@ class Question extends Entity
         // получение экземпляра класса DB
         $db = DB::getInstance();
     
-        $query = "SELECT * FROM questions ORDER BY RAND()";
+        $query = "SELECT * FROM questions";
         if (!empty(QUIZ_LIMIT) && is_numeric(QUIZ_LIMIT)) {
-            $query .= ' limit 0, ' . QUIZ_LIMIT;
+            $query .= ' limit 120, ' . QUIZ_LIMIT;
         }
         $result = $db->query($query);
         if (!$result) {

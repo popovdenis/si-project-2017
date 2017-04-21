@@ -17,7 +17,8 @@
     </div>
 </div>
 <?php
-if (!Quiz::isQuizStarted()) {
+if (Quiz::isQuizStarted()) {
+    Quiz::finishQuiz();
     Quiz::startQuiz();
 }
 ?>

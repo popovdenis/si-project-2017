@@ -45,7 +45,7 @@ $questionPercent = Quiz::getQuizProgressPercent();
                             <hr/>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Answers:</label>
-                                <?php $answers = Answer::getAnswersFromDBByQuestionId($currentQuestion['id']) ?>
+                                <?php $answers = Answer::getAnswersByQuestionId($currentQuestion['id']) ?>
                                 <?php shuffle($answers) ?>
                                 <?php foreach ($answers as $answer) : ?>
                                     <div class="radio">
