@@ -23,6 +23,9 @@ if (!empty($_POST)) {
         // iterate answers
         $answers = [];
         foreach ($answersFromPost as $answerId => $answer) {
+            if (empty($answer)) {
+                continue;
+            }
             // prepare answer data
             $answerData = [
                 'answer' => $answer,
